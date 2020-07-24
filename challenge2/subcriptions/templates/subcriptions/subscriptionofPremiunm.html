@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="{% static 'subcriptions/card-js.min.js' %}"></script>
+    <link
+      href="{% static 'subcriptions/card-js.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arvo|Bitter|Bree+Serif|Righteous|Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .buttonwrapper {
+        text-align: center;
+      }
+      .submitbutton {
+        background: rgb(231, 68, 158); /* Old browsers */
+        background: -moz-linear-gradient(
+          top,
+          rgb(231, 68, 158, 1) 0%,
+          rgb(220, 68, 158) 100%
+        ); /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+          top,
+          rgb(231, 68, 158) 0%,
+          rgb(220, 68, 158) 100%
+        ); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(
+          to bottom,
+          rgb(231, 68, 158) 0%,
+          rgb(220, 68, 158) 100%
+        ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44afe7', endColorstr='#3198df',GradientType=0 );
+        color: #fff;
+        padding: 5px 20px;
+        border: 1px solid rgba(46, 86, 153, 0.0980392);
+        border-bottom-color: rgba(46, 86, 153, 0.4);
+        border-top: 0;
+        border-radius: 4px;
+        font-size: 14px;
+        text-shadow: rgba(46, 86, 153, 0.298039) 0px -1px 0px;
+        line-height: 34px;
+        -webkit-font-smoothing: antialiased;
+        margin-top: 20px;
+        font-family: Bitter;
+        font-weight: bold;
+      }
+      .submitbutton:hover {
+        cursor: pointer;
+      }
+      .carbody {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0em 0rem 16px rgba(0, 0, 0, 0.4);
+        padding: 0.5rem;
+        width: 30rem;
+        border-radius: 1rem;
+      }
+      .head h5 {
+        font-weight: bold;
+        font-family: Bitter;
+        font-size: 1rem;
+        color: #3c4257;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Basic -->
+    <div class="carbody p-1">
+      <div class="head">
+        <h5>Credit Card</h5>
+      </div>
+      <form method="POST">
+        {% csrf_token %}
+        <div
+          class="card-js"
+          id="my-card"
+          data-capture-name="true"
+          data-icon-colour="#eb648c"
+        >
+          <input class="card-number my-custom-class" name="card-number" />
+          <input
+            class="name"
+            id="the-card-name-id"
+            name="card-holders-name"
+            placeholder="Name on card"
+          />
+          <input class="expiry-month" name="expiry-month" />
+          <input class="expiry-year" name="expiry-year" />
+          <input class="cvc" name="cvc" />
+        </div>
+        <div class="buttonwrapper">
+          <button class="submitbutton" id="submitb">
+            Subscribe
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Change Icon Color -->
+    <script>
+      var button = document.getElementById("submitb");
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+        var myCard = $("#my-card");
+
+        var cardNumber = myCard.CardJs("cardNumber");
+        var cardType = myCard.CardJs("cardType");
+        var name = myCard.CardJs("name");
+        var expiryMonth = myCard.CardJs("expiryMonth");
+        var expiryYear = myCard.CardJs("expiryYear");
+        var cvc = myCard.CardJs("cvc");
+
+        var valid = CardJs.isExpiryValid(expiryMonth, expiryYear);
+        if (valid) {
+          submit_form(cardNumber, cardType, name, expiryMonth, expiryYear, cvc);
+        }
+      });
+
+      function submit_form(
+        cardNumber,
+        cardType,
+        name,
+        expiryMonth,
+        expiryYear,
+        cvc
+      ) {
+        // document.getElementById("horizontalloaders11").style.display = "block";
+        document.getElementById("my-card").style.opacity = "0.5";
+
+        $.ajax({
+          type: "POST",
+          url: "/makesubscription/Premier/",
+          dataType: "json",
+          data: {
+            cardNumber: cardNumber,
+            cardType: cardType,
+            name: name,
+            expiryMonth: expiryMonth,
+            expiryYear: expiryYear,
+            cvc: cvc,
+            subtype: "Premium",
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+          },
+          success: function (data) {
+            document.getElementById("my-card").style.opacity = "1";
+            // document.getElementById("horizontalloaders11").style.display =
+            //   "none";
+            console.log(data);
+            if (data.nouser) {
+              document.getElementById("alerts").style.display = "block";
+              document.getElementById("note_pass1").innerHTML =
+                "No user with this Credentials";
+            }
+            if (data.wrongpassword) {
+              document.getElementById("alerts").style.display = "block";
+              document.getElementById("note_pass1").innerHTML =
+                "Incorrect Password";
+            }
+            if (data.success) {
+              location.href = "/Premiunm/";
+            }
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

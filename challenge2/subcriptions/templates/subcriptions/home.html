@@ -1,0 +1,1698 @@
+{% load static %}
+
+
+<html>
+<head>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<title>
+Home  |  Whatsbussy.</title>
+    
+<link rel="stylesheet" href="{% static 'subcriptions/home.css' %}">
+<link rel="icon" type="image/x-icon" href="{% static 'subcriptions/shelf.jpg' %}">
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+ <!-- Bootstrap core CSS -->
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- Material Design Bootstrap -->
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Arvo|Bitter|Bree+Serif|Righteous|Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<style>
+    .tool {
+      background: #333;
+      color: white;
+      font-weight: bold;
+      padding: 4px 8px;
+      font-size: 13px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .tool[data-show] {
+      display: block;
+      position: absolute;
+      margin-left: 10rem !important;
+      
+    }
+
+    .arrow,
+    .arrow::before {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      z-index: -1;
+    }
+
+    .arrow::before {
+      content: '';
+      transform: rotate(45deg);
+      background: black;
+    }
+
+    .tool[data-popper-placement^='top'] > .arrow {
+      bottom: -4px;
+    }
+
+    .tool[data-popper-placement^='bottom'] > .arrow {
+      top: -4px;
+    }
+
+    .tool[data-popper-placement^='left'] > .arrow {
+      right: -4px;
+    }
+
+    .tool[data-popper-placement^='right'] > .arrow {
+      left: -4px;
+    }
+  </style>
+   
+
+      <style>
+          .name,  h5{
+    font-size: 0.8rem;
+}
+.value,  h5{
+    font-size: 0.8rem;
+}
+           #img2,#img3{
+      display: none;
+  }
+  #model1
+  {
+      border: 1px solid #eb648c;
+      margin: 0rem 1rem 1rem;
+      padding: 0.5rem 0.8rem 0.8rem;
+    
+  }
+  #model2
+  {
+     
+      margin: 0rem 0rem 1rem;
+      border: 1px solid #fafaff;
+      padding: 0.5rem 0.8rem 0.8rem;
+    
+  }
+#alerts{
+display: none;
+        }
+
+        #otpform{
+display: none;
+        }
+        #sigupform
+        {
+          display: block;
+        }
+        #wrongotps{
+          display: none;
+        }
+        .foolinks{
+          color: #fafafa;
+        }
+          #message{
+              display: none;
+          }
+        
+ .players a:hover > li{
+    
+    background-color: #eee;
+    cursor: pointer;
+  }
+  #v-pills-home-tab{
+        background-color: #eb648c;
+        color: #fafafa;
+  }
+  .nav a{
+    color: #eb648c;font-weight: bold;
+  }
+  .players{
+    display: grid;
+    grid-template-columns: ;
+  }
+    .li1{
+    color: black;
+    }
+    .li1 i{
+        color: black;
+    }
+
+
+
+          .fixtures{
+              box-shadow: none !important;
+              border:1px solid grey;
+              /* width: 24rem !important; */
+          }
+          #test9{
+              box-shadow: none;
+          }
+    
+      .list li{
+        padding: 0.5rem;
+        font-weight: bold;
+        margin: 0 !important;
+      }
+      .list{
+        list-style: none;
+      }
+      #Summary{
+        display: none;
+      }
+
+  body{
+    /* background-image: url('/static/subcriptions/wallpaper.png'); */
+  }
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 2px solid rgb(230, 207, 228);
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1),
+    0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+  font-family: Special elite,cursive;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+.input{
+  width: 100%;
+  border: none;
+  outline: none;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  /* border-top: 1px solid rgb(230, 207, 228);
+  border-bottom: 1px solid rgb(230, 207, 228); */
+}
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  
+  color: #eb648c;
+  min-width: 50px;
+  text-align: center;
+
+
+}
+
+.qty{
+  padding: 10px;
+  background: #eb648c;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  border-bottom-left-radius: 1rem;                                                                                                                                    em;
+  border-top-left-radius: 1rem;
+
+}
+
+/* Style the input fields */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+
+}
+
+.noe{
+  margin: 0.5rem;
+  
+}
+.noe span{
+
+}
+
+
+/* Set a style for the submit button */
+#buttons button{
+    cursor: pointer;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+#sub:hover{
+cursor: pointer;
+}
+.sub:hover{
+    cursor: pointer;
+}
+
+body{
+    margin-right: 0 !important;
+}
+
+
+      </style>
+</head>
+{% if matchend %}
+<style>
+
+.minibat{
+  display: none;
+}
+
+.minibowl{
+  display: none;
+}
+
+</style>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+
+
+
+
+
+  <style>
+
+
+.horizontalloaders1{
+    width: 50%;
+    height: 10px;
+    position: relative;
+    border-radius:2rem;
+    overflow: hidden !important;
+    display: none;
+    margin-bottom: 0.5rem;
+    background-color: #eb648c;
+    animation-name: examples;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+
+  @keyframes examples {
+    0%   {background-color:#eb648c; left:0px; top:0px;}
+    90%   {background-color:#eb648c; left:90%; top:0px;}
+    100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+  }
+
+  #horizontalloaders12{
+    width: 50%;
+    height: 10px;
+    position: relative;
+    border-radius:2rem;
+    display: none;
+    overflow: hidden !important;
+    background-color: #eb648c;
+    animation-name: examples1;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+
+  @keyframes examples1 {
+    0%   {background-color:#eb648c; left:0px; top:0px;}
+    90%   {background-color:#eb648c; left:90%; top:0px;}
+    100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+  }
+
+
+
+
+  #horizontalloaders21{
+    width: 50%;
+    height: 10px;
+    position: relative;
+    border-radius:2rem;
+    display: none;
+    overflow: hidden !important;
+    background-color: #eb648c;
+    animation-name: examples21;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+
+  @keyframes examples21 {
+    0%   {background-color:#eb648c; left:0px; top:0px;}
+    90%   {background-color:#eb648c; left:90%; top:0px;}
+    100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+  }
+
+
+  .horizontalloaders3{
+    width: 50%;
+    height: 10px;
+    position: relative;
+    border-radius:2rem;
+    overflow: hidden !important;
+    display: none;
+    background-color: #eb648c;
+    animation-name: examples3;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+
+  @keyframes examples3 {
+    0%   {background-color:#eb648c; left:0px; top:0px;}
+    90%   {background-color:#eb648c; left:90%; top:0px;}
+    100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+  }
+
+
+
+
+  .horizontalloaders4{
+    width: 50%;
+    height: 10px;
+    position: relative;
+    border-radius:2rem;
+    overflow: hidden !important;
+    display: none;
+    background-color: #eb648c;
+    animation-name: examples4;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  
+  }
+
+  @keyframes examples4 {
+    0%   {background-color:#eb648c; left:0px; top:0px;}
+    90%   {background-color:#eb648c; left:90%; top:0px;}
+    100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+  }
+</style>
+
+
+
+<script>
+
+
+
+
+  function myfunc2(value)
+      {   
+          
+            if(value=='')
+            {
+              document.getElementById('suggestions').style.display="none";
+            }
+            else{
+              document.getElementById('suggestions').style.display='block';
+            }
+            
+          var req = new XMLHttpRequest();
+          link = '/search/suggestions/query='+value+'/';
+          console.log(link);
+          req.open('GET',link,true);
+          req.send();
+          
+          req.onreadystatechange = function (){
+              if(req.readyState ==4 && req.status == 200)
+                  {
+                      document.getElementById('suggestions').innerHTML = req.responseText;
+                  }
+          }
+      }
+  
+  
+  </script>
+  
+  
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+function submit_form(){
+        console.log('Came here');
+    document.getElementById('horizontalloaders11').style.display="block";
+    document.getElementById('loginform').style.opacity="0.5";
+    $(document).on('submit','#loginform',function(e){
+       e.preventDefault();
+       emails = document.getElementById('email').value
+       pass = document.getElementById('password').value
+       console.log(emails,pass)
+       $.ajax({
+             type:'POST',
+             url:'/user/login/',
+             dataType: 'json',
+             data:{
+               email:emails,
+               password : pass,
+               csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+             },
+             success:function(data){
+              document.getElementById('loginform').style.opacity="1";
+    document.getElementById('horizontalloaders11').style.display="none";
+                 console.log(data);
+               if (data.nouser){
+                document.getElementById('alerts').style.display = 'block';
+                document.getElementById('note_pass1').innerHTML = 'No user with this Credentials'
+               }
+               if (data.wrongpassword){
+                  document.getElementById('alerts').style.display = 'block';
+                  document.getElementById('note_pass1').innerHTML = 'Incorrect Password'
+               }
+               if (data.valid){
+                location.href='/';
+               }
+            
+             }
+       });
+    });
+    
+    }
+    
+    
+    </script>
+    
+
+    <script>
+
+
+
+
+
+
+        function submit_signup(){
+           
+//             $('#exampleModal').modal('hide');
+//             $('body').removeClass('modal-open');
+// $('.modal-backdrop').remove();
+ 
+// $('#message').modal('show');
+          document.getElementById('sigupform').style.opacity="0.5";
+          document.getElementById('horizontalloaders12').style.display="block";
+          names = document.getElementById('name')
+          names.setAttribute('readonly','')
+          emails = document.getElementById('email1')
+          emails.setAttribute('readonly','')
+          lastnames = document.getElementById('lastname')
+          lastnames.setAttribute('readonly','')
+          pnumbers = document.getElementById('phnumber')
+          pnumbers.setAttribute('readonly','')
+            console.log('Came here');
+            $(document).on('submit','#sigupform',function(e){
+               e.preventDefault();
+               names = document.getElementById('name').value
+               emails = document.getElementById('email1').value
+               lastnames = document.getElementById('lastname').value
+               pnumbers = document.getElementById('phnumber').value
+               console.log(names,emails,lastnames);
+               document.getElementById('userexits').style.display = 'none';
+                document.getElementById('userexits').style.color='#ff3333';
+                document.getElementById('email1').style.border='1px solid grey';
+               $.ajax({
+                     type:'POST',
+                     url:'/user/signup/',
+                     dataType: 'json',
+                     data:{
+                       name:names,
+                       lastname:lastnames,
+                       email : emails,
+                       phnumber:pnumbers,
+                       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                     },
+                     success:function(data){
+                      names = document.getElementById('name')
+                      names.removeAttribute('readonly')
+                      emails = document.getElementById('email1')
+                      emails.removeAttribute('readonly')
+                      lastnames = document.getElementById('lastname')
+                      lastnames.removeAttribute('readonly')
+                      pnumbers = document.getElementById('phnumber')
+                      pnumbers.removeAttribute('readonly')
+                      document.getElementById('sigupform').style.opacity="1";
+                      document.getElementById('horizontalloaders12').style.display="none";
+                      console.log(data);
+                       if (data.userexists){
+                        document.getElementById('userexits').style.display = 'block';
+                       document.getElementById('userexits').innerHTML = 'Someone has already Registered with this email-id';
+                       document.getElementById('userexits').style.color='#ff3333';
+                       document.getElementById('email1').style.border='2px solid #ff3333';
+               }
+               if (data.notvalidname){
+                   notvalidname();
+               }
+               if (data.notvalidlastname){
+                   notlastname();
+               }
+               if (data.emailsend){
+    $('#message').css({'display': 'block'});
+    document.getElementById("sigupform").reset();
+               }
+               if(data.otpsend){
+                 document.getElementById('otpform').style.display = 'block';
+                 document.getElementById('sigupform').style.display='none';
+               }
+                    
+                     }
+               });
+            });
+            
+            }
+            
+            
+            </script>
+<script>
+  function submit_otp(emails)
+  {
+    document.getElementById('otpform').style.opacity="0.5";
+    otp = document.getElementById('otp')
+    otp.setAttribute('readonly','')
+    document.getElementById('horizontalloaders12').style.display="block";
+    console.log('Came heressss');
+    console.log(emails);
+            $(document).on('submit','#otpform',function(e){
+               e.preventDefault();
+               otp = document.getElementById('otp').value
+               console.log(otp);
+              //  document.getElementById('userexits').style.display = 'none';
+              //   document.getElementById('userexits').style.color='#ff3333';
+              //   document.getElementById('email').style.border='1px solid grey';
+               $.ajax({
+                     type:'POST',
+                     url:'/user/otp/',
+                     dataType: 'json',
+                     data:{
+                       otp:otp,
+                       email:emails,
+                       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                     },
+                     success:function(data){
+                      otp = document.getElementById('otp')
+                      otp.removeAttribute('readonly')
+                      document.getElementById('otpform').style.opacity="1";
+                      document.getElementById('horizontalloaders12').style.display="none";
+                         console.log(data);
+                       if (data.otpwrong){
+                        document.getElementById('wrongotps').style.display = 'block';
+                       document.getElementById('wrongotp').innerHTML = 'Invalid OTP ';
+                      
+               }
+               if (data.emailsend){
+    $('#message').css({'display': 'block'});
+    document.getElementById("sigupform").style.display = 'block';
+    document.getElementById("sigupform").reset();
+    document.getElementById("otpform").reset();
+    document.getElementById("otpform").style.display = 'none';
+               }
+                    
+                     }
+               });
+            });
+  }
+</script>
+
+<script>
+  
+function addtocart_form(id,qty){
+    
+
+  console.log(id)
+  document.getElementById('loaders').style.display="block";
+  document.getElementById('hero').style.opacity="0.5";
+    $(document).on('submit',('#'+id),function(e){
+        
+        e.preventDefault();
+        $.ajax({
+              type:'POST',
+              url:'/user/addtocart/',
+              dataType: 'json',
+              data:{
+                bookid:id,
+                qty:qty,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+              },
+              success:function(data){
+                  console.log(data);
+                if (data.success){
+                document.getElementById('loaders').style.display="none";
+                document.getElementById('hero').style.opacity="1";
+                
+                
+               
+        }
+        
+              }
+        });
+    });
+    
+    }
+    
+              
+              </script>
+<script>
+  
+  function quantity(id){
+      
+  
+    console.log(id)
+    document.getElementById('loaders').style.display="block";
+    document.getElementById('hero').style.opacity="0.5";
+    console.log(id.slice(6))
+    ids = 'ex1'+ id.slice(6)
+    console.log(ids)
+      $(document).on('submit',('#'+id),function(e){
+          
+          e.preventDefault();
+          $.ajax({
+                type:'POST',
+                url:'/user/incresequantity2/',
+                dataType: 'json',
+                data:{
+                  cartid:id.slice(6),
+                  qty:document.getElementById(ids).value,
+                  csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(data){
+                    console.log(data);
+                  if (data.success){
+                  document.getElementById('loaders').style.display="none";
+                  document.getElementById('hero').style.opacity="1";
+                  location.href='/Books/User/Procedcart/';
+                  
+                 
+          }
+          
+                }
+          });
+      });
+      
+      }
+      
+                
+                </script>
+<script>
+
+
+function deletes(id){
+      
+  
+      console.log(id)
+      document.getElementById('loaders').style.display="block";
+      document.getElementById('hero').style.opacity="0.5";
+      console.log(id)
+    
+        $(document).on('submit',('#'+id),function(e){
+            
+            e.preventDefault();
+            $.ajax({
+                  type:'POST',
+                  url:'/user/deletefromcart/',
+                  dataType: 'json',
+                  data:{
+                    cartid:id.slice(6),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                  },
+                  success:function(data){
+                      console.log(data);
+                    if (data.success){
+                    document.getElementById('loaders').style.display="none";
+                    document.getElementById('hero').style.opacity="1";
+                    
+                    
+                   
+            }
+            
+                  }
+            });
+        });
+        
+        }
+        
+
+</script>
+
+<script>
+
+
+    function change(id){
+          
+      
+     
+          document.getElementById('loaders').style.display="block";
+          document.getElementById('hero').style.opacity="0.5";
+  
+        
+            $(document).on('submit',('#'+id),function(e){
+                
+                e.preventDefault();
+                $.ajax({
+                      type:'POST',
+                      url:'/user/addresses/changeaddress/',
+                      dataType: 'json',
+                      data:{
+                        addid:id.slice(7),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                      },
+                      success:function(data){
+                          console.log(data);
+                        if (data.success){
+                        document.getElementById('loaders').style.display="none";
+                        document.getElementById('hero').style.opacity="1";
+                        location.reload();
+                        
+                       
+                }
+                
+                      }
+                });
+            });
+            
+            }
+            
+    
+    </script>
+<script>
+
+function search(){
+document.getElementById('searchicon').style.display="none";
+document.getElementById('search1').style.display="block";
+document.getElementById('search1').style.position="relative";
+document.getElementById('search1').style.left="0rem";
+document.getElementById('times').style.display="block";
+}
+
+function close1(){
+  document.getElementById('times').style.display="none";
+  document.getElementById('search1').style.display="none";
+  document.getElementById('searchicon').style.display="block";
+  document.getElementById('searchicon').style.position="relative";
+ document.getElementById('searchicon').style.top="0.9rem"
+}
+
+
+function open_menu(){
+  document.getElementById('content1').style.width="26rem";
+  document.getElementById('nav1').style.position="fixed";
+  // document.getElementById('container').style.opacity="0.4";
+  document.getElementById('moblist').style.opacity="1";
+  document.getElementById('moblist').style.visibility="visible";
+  document.getElementById('moblist').style.position="fixed";
+  document.getElementById('opens').style.display="none";
+  document.getElementById('closes').style.display="block";
+
+  
+}
+
+function close_menu(){
+  document.getElementById('content1').style.width="0rem";
+  document.getElementById('nav1').style.position="initial";
+  document.getElementById('moblist').style.opacity="0";
+  document.getElementById('moblist').style.visibility="hidden";
+  document.getElementById('opens').style.display="block";
+  document.getElementById('closes').style.display="none";
+  // document.getElementById('container').style.opacity="1";
+ 
+}
+</script>
+<body style="">
+  <div class="mobilefilter" >
+    
+      
+    <div class="mobilefilters bg-white" id="mobfilter">
+  
+  
+  <div class="closes" style="margin:1rem;">
+    <button style="background-color: hotpink;padding: 0.5rem 1rem;border: none;font-size: 1.5rem;" onclick="closeNav()"><i class="fas fa-times" style="font-size: 1rem;font-weight: bold;color: #fafafa;"></i></button>
+    
+  </div><br>
+      <div class="product1">
+      <h4 style="font-family: special Elite,cursive;font-weight: bold;color: #eb648c;padding: 1rem;"> <i class="fas fa-book"></i> Bachelor Courses</h4>
+      {% for i in  bcourse %}
+      <a href="#">
+      <button class="cbutton">
+        {{i.1}}
+      </button>
+    </a>
+    {% endfor %}
+      </div>
+              
+      <div class="product1">
+          <h4 style="font-family: special Elite,cursive;font-weight: bold;color: #eb648c;padding: 1rem;"><i class="fas fa-book"></i> Master Courses</h4>
+              
+          {% for i in  mcourse %}
+          <a href="#">
+          <button class="cbutton">
+            {{i.1}}
+          </button>
+        </a>
+        {% endfor %}
+
+
+
+          </div>
+      
+      
+      
+      
+                  
+      <div class="product1">
+          <h4 style="font-family: special Elite,cursive;font-weight: bold;color: #eb648c;padding: 1rem;"><i class="fas fa-book"></i> Jrcollege</h4>
+              
+         
+          <a href="#">
+          <button class="cbutton">
+            XI SCIENCE
+          </button>
+        </a>
+      
+        <a href="#">
+          <button class="cbutton">
+            XII SCIENCE
+          </button>
+        </a>
+        <a href="#">
+          <button class="cbutton">
+            XI Arts
+          </button>
+        </a>
+        <a href="#">
+          <button class="cbutton">
+            XII Arts
+          </button>
+        </a>
+        <a href="#">
+          <button class="cbutton">
+            XI Commerce
+          </button>
+        </a>
+        <a href="#">
+          <button class="cbutton">
+            XII Commerce
+          </button>
+        </a>
+
+
+
+          </div>
+      
+      
+          
+   
+                   </div>
+  
+  
+  
+  
+  </div>
+
+ 
+    <header id="nav1">
+      <div class="containers" id="head">
+          <nav id="nav">
+              <div class="brand" style="display: inline-block;">
+           
+              <div id="logos" style="display: inline-block;">
+                <div class="mainlogo" style="display: inline-block;">
+
+                    <!-- <div class="note" style="display: inline-block;border: none;">
+                        <i class="fas fa-bars" id="opens" onclick="openNav()"></i>
+                        <i class="fas fa-times"  id="closes" onclick="closeNav()"></i>
+                      </div> -->
+                    <div class="logo_link" style="display: inline-block;">
+                    <a href="{% url 'home' %}" style="color: #eb648c;font-size:3rem;font-weight:bold,text-decoration: none;margin-bottom: 1rem !important;display: inline-block;">
+                           <img src="{% static 'subcriptions/logo.png' %}" id="pic" alt="" style="">
+                        </a>
+                        </div>
+
+                </div>
+            
+              </div>
+              
+                
+            
+<div id="links" style="display: inline-block;">
+
+              <ul class="nav-list" id="navs" style="list-style: none !important;display: flex;">
+
+                 
+                <!-- <li class="nav-items">
+                    <a href="#" class="nav-link" style="">Courses</a>
+                    <ul class="sublist shadow-lg p-3 mb-5 bg-white rounded"> 
+                        <li class="sub-items">
+                            <a href="#" class="nav-link" style="color:grey">B.B.A </a>
+                    
+                        </li>
+      
+                        <li class="sub-items">
+                          <a href="#" class="nav-link" style="color:grey">B.C.A</a> 
+                  </li>
+                      <li class="sub-items">
+                          <a href="#" class="nav-link" style="color:grey">B.SC</a>
+                  
+                      </li>
+                       
+                      <li class="sub-items">
+                        <a href="#" class="nav-link" style="color:grey">B.COM</a>
+                
+                    </li>
+                    <li class="sub-items">
+                        <a href="#" class="nav-link" style="color:grey">Desktop Scorecard</a>
+                
+                    </li>
+                    </ul> 
+            </li> -->
+                 <li class="nav-items" style="">
+                    <a href="#" class="nav-link" style="color: #eb648c;font-size: 1.5rem;">WhatsBusy</a>
+              
+                    <!-- <ul class="sublist shadow-lg p-3 mb-5 bg-white rounded"  style="display: inline-block;width: 50rem;"> 
+                      {% for i in choice1 %} 
+                      <div class="li1" style="display: flex;justify-items: center;justify-content: space-around;">
+                    
+                          <div class="li3">
+                              <li class="sub-items"  >
+                                  <a href="#" class="nav-link" style="color:grey;font-size:0.7rem !important">{{ i.1.1 }}</a>
+                          
+                              </li>
+                          </div>
+
+                          <div class="li2" >
+                            <li class="sub-items" >
+                                <a href="#"class="nav-link" style="color:grey;font-size: 0.7rem !important;">{{ i.2.1 }}</a>
+                        
+                            </li>
+                        </div>
+                        <div class="li3" >
+                            <li class="sub-items" >
+                                <a href="#" class="nav-link" style="color:grey;font-size: 0.7rem !important;">{{ i.3.1 }}</a>
+                        
+                            </li>
+                        </div>
+                        <div class="li2" >
+                          <li class="sub-items">
+                              <a href="#"class="nav-link" style="color:grey;font-size: 0.7rem !important;">{{ i.0.1 }}</a>
+                      
+                          </li>
+                      </div>
+                        </div>  
+                        {% endfor %}
+                   
+
+
+                      </ul> -->
+                 
+                </li> 
+
+           
+              <!-- <li class="nav-items">
+                  <a href="#" class="nav-link" style="color: #fafafa;">JR Colleges</a>
+                  <ul class="sublist shadow-lg p-3 mb-5 bg-white rounded"> 
+                    
+
+                    <div class="li1" style="display: flex;justify-content: space-between;">
+                      <div class="li2">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XI SCIENCE</a>
+                      
+                          </li>
+                      </div>
+                      <div class="li3">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XII SCIENCE</a>
+                      
+                          </li>
+                      </div>
+
+
+                    </div>  
+
+
+
+                    
+                    <div class="li1" style="display: flex;justify-content: space-between;">
+                      <div class="li2">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XI ARTS</a>
+                      
+                          </li>
+                      </div>
+                      <div class="li3">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XII ARTS</a>
+                      
+                          </li>
+                      </div>
+
+
+                    </div>  
+
+
+
+                    
+                    <div class="li1" style="display: flex;justify-content: space-between;">
+                      <div class="li2">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XI COMMERCE</a>
+                      
+                          </li>
+                      </div>
+                      <div class="li3">
+                          <li class="sub-items">
+                              <a href="#" class="nav-link" style="color:grey;font-size: 0.8rem !important;">XII COMMERCE</a>
+                      
+                          </li>
+                      </div>
+
+
+                    </div>  
+        
+                  </ul> 
+              </li> -->
+               
+           
+
+
+                </ul>
+</div>
+
+          </div>
+          <div id="links2" class="menu" style="display: inline-block;" >
+                  
+                  <ul class="nav-list1" id="navs" style="list-style: none !important;display: flex;padding-top: 1rem !important;float:right;">
+                  
+                 
+                  <li class="nav-items1" id="searchbar" style="display: inline-block;">
+                      <i class="fas fa-search" id="searchicon" onclick="search()" style="color: #eb648c;"></i>
+                      <div  id="searachform" style="display: inline-block;">
+                      <form id="search1" style="transition: all 650ms ease-in-out;" >
+                          <input type="text" name="search" placeholder="Search.." >
+                          <button type="submit" id="submit" style="border: none;background: #ffffff;color: eb648c;"><i class="fas fa-search"></i></button>
+                        </form>
+                        </div>
+                       <div style="display: inline-block;"> <i class="fas fa-times" id="times" onclick="close1()" style="display: none;color:#eb648c;"></i></div>
+          
+                      </li>
+            {% if user.is_authenticated %}
+            <li class="nav-link mt-1">
+              <i class="fas fa-house-user" style="color:#eb648c;font-size:2rem"></i> 
+            </li>
+            <li class="nav-link mt-1">
+              <i class="fas fa-percentage" style="color:#eb648c;font-size:2rem"></i> 
+             </li>
+             <li class="nav-link mt-1">
+            
+              <i class="fab fa-hotjar" style="color:#eb648c;font-size:2rem"></i>
+             </li>
+             <a href="{% url 'MySubscription' %}"  >
+            <li class="nav-link mt-1">
+              <i class="fas fa-user" style="color:#eb648c;font-size:2rem"></i>
+            </li>
+          </a>
+          <a href="#" data-toggle="modal" data-target="#logout" >
+            <li class="nav-link mt-1">
+           <i class="fas fa-sign-out-alt" style="color:#eb648c;font-size:2rem"></i>
+            </li>
+          </a>
+            {% else %}
+            <a href="{% url 'SIGNUP' %}">
+            <li class="nav-link mt-1">
+              Signup
+            </li></a>
+            
+            <a href="{% url 'Login' %}">
+            <li class="nav-link mt-1">
+              Login
+            </li></a>
+            {% endif %}
+
+                 
+
+
+                  </ul>
+          </div>
+      
+          </nav>
+      </div>
+  
+      </header>
+    <br>
+    
+    <div class="loader" id="loaders"></div>   
+    <div class="main1" style="border: none;"> 
+      {% if messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {% for message in messages %}
+          <span  style="font-weight: bold;">  <i class="fas fa-check-circle"></i> {{ message }} </span>
+          {% endfor %}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       {% endif %}
+
+
+
+</div>
+
+
+  <div id="heros" style="">
+    
+
+<div class="recovery bg-white">
+ 
+    <h4>Whatsbussy Basic Package</h4>
+
+    <div class="noe">
+        <div class="lis">
+            <ul style="list-style: none;">
+              <li>
+                <i class="fas fa-times wicon"></i> Free 7days Trail
+              </li>
+                <li>
+                  <i class="fas fa-check cicon"></i>  Drive sales and profits with simple recommendations Guaranteed
+                </li>
+                <li>
+                  <i class="fas fa-check cicon"></i>   WhatsBusy uses the industry’s most advanced data science to simplify your POS data, clearly telling you what to do, and what it’s worth.
+                </li>
+                <li>
+                  <i class="fas fa-times wicon"></i>  24 hours Service
+                </li>
+                <li>
+                  <i class="fas fa-times wicon"></i>   Money back Any time
+                </li>
+ 
+            </ul>
+        </div>
+    
+
+        
+
+<div class="bt">
+  {% if user.is_authenticated %}
+  {% if hasbasic %}
+  <a href="{% url 'Basic' %}">
+   
+  <button type="submit" id="checkout-button">
+Subscribed
+  </button></a>
+  {% else %}
+  <a href="{% url 'makebasicsubscription'}">
+  <button type="submit" id="checkout-button">
+    $ 199/ Month
+      </button>
+    </a>
+  {% endif %}
+
+  {% else %}
+  <a href="{% url 'SIGNUP' %}"><button type="submit">
+    $ 199/ Month
+      </button></a>
+  {% endif %}
+</div>
+
+
+    </div>
+</div>
+
+   
+<div class="recovery bg-white">
+ 
+  <h4>Whatsbussy Premeium Package</h4>
+
+  <div class="noe">
+      <div class="lis">
+          <ul style="list-style: none;">
+            <li>
+              <i class="fas fa-check cicon"></i> Free 7days Trail
+            </li>
+              <li>
+                <i class="fas fa-check cicon"></i>  Drive sales and profits with simple recommendations Guaranteed
+              </li>
+              <li>
+                <i class="fas fa-check cicon"></i>   WhatsBusy uses the industry’s most advanced data science to simplify your POS data, clearly telling you what to do, and what it’s worth.
+              </li>
+              <li>
+                <i class="fas fa-check cicon"></i>  24 hours Service
+              </li>
+              <li>
+                <i class="fas fa-check cicon"></i>   Money back Any time
+              </li>
+          </ul>
+      </div>
+  
+
+      
+
+<div class="bt">
+  {% if user.is_authenticated %}
+  {% if haspremium %}
+<a href="{% url 'Premiunm' %}"><button type="submit">
+View
+</button></a>
+{% else %}
+<a href="{% url 'subscriptionofPremiunm' %}"><button type="submit">
+  $ 499/ Month
+  </button></a>
+{% endif %}
+{% else %}
+<a href="{% url 'SIGNUP' %}">
+<button type="submit">
+  $ 499 / Month
+  </button>
+  </a>
+{% endif %}
+</div>
+
+
+  </div>
+</div>
+
+
+
+</div>
+
+
+
+<!---CAROUSELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title align-center" id="exampleModalLabel" style="text-align: center;">Join Us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="font-weight: bold;color: white !important;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+        <div id="active_women">
+            <div class="off-navbar" id="womens" style="margin: 1rem auto;">
+                <ul class="of-nav" style="">
+                  <li class="off-items " id="act" onclick="earn()" style="text-align: center;font-family: bitter;" >Login<br></li>
+                  <li class="off-items" id="plu" onclick="plumber()" style="text-align: center;border: none;font-family: bitter;" >Signup<br></li>
+                  <!-- <li class="off-items" id="elect" onclick="elect()" style="">T20<br></li> -->
+                  <!-- <li class="off-items" id="repair" onclick="active_repair()" style="color: black;">Repairer<br><i class="fas fa-tools"></i></li> -->
+                </ul>
+            
+             </div>
+            <br>
+            <div class="tab-pane fade show active shadow-lg p-3 mb-5 bg-white rounded" id="odi1" >    <div class="test" style="background-color: #eb648c; color: white;height:5rem;margin-bottom: 2rem;">
+                <h5 style="text-align: center;font-size:2rem;padding-top:1rem;font-family:bitter">Login</h5>
+            </div>
+            <div class="horizontalloaders1" id="horizontalloaders11"></div>
+            <form method="POST" id="loginform" onsubmit="submit_form()" >
+                {% csrf_token %}
+                <br>
+                <br>
+             
+           <div class="input-container">
+             <i class="fas fa-user icon"></i>
+             <input class="input-field" type="text" placeholder="Mobile Number or Email" name="email" id="email">
+           </div>
+          <div class="note" style="margin-top: -1.5rem;border: none;">
+              <span id="note_email" style="font-weight: bold;"></span>
+          </div>
+           <div class="input-container">
+             <i class="fa fa-key icon"></i>
+             <input class="input-field" type="password" placeholder="Password" name="psw" id="password">
+           </div>
+           <div class="note alert-danger mb-1" id="alerts">
+            <span id="note_pass1" style="font-weight: bold;"></span>
+            <span id="note_pass2" style="font-weight: bold;"></span>
+            <span id="note_pass3" style="font-weight: bold;"></span>
+        </div>
+           
+      
+                   <div style="display: flex;justify-content: center;">
+                  <button id="sub" type="submit"  style="
+                   width: 15rem;
+                   height: auto;
+                   text-align: center;
+                   background: #eb648c;
+                   color: white;font-size: 2rem;
+                   font-weight: bold;
+                   text-decoration: none;
+                   border: 2px solid #eb648c;
+                 border-radius: 2rem;
+                font-family: Special Elite,cursive;
+                text-transform: uppercase; 
+               
+               " > Login   </button>
+                  </div>
+                  <h5 style="color: black;text-transform:initial;font-size:0.8rem;font-weight: bold;text-align: center;padding-top: 0.8rem;">Need An Account? <a href="#" onclick="plumber()" style="text-decoration: none;color:purple;"> Signup</a></h5>
+             
+          
+               </form>
+            
+    
+        
+        
+        </div>
+            <div class="tab-pane fade show active shadow-lg p-3 mb-5 bg-white rounded" id="t201" >    <div class="test" style="background-color: #eb648c; color: white;height:5rem;margin-bottom: 2rem;">
+                <h5 style="text-align: center;font-size:2rem;padding-top:1rem;font-family:bitter">Signup</h5>
+            </div>
+        
+              <div class="alert alert-warning alert-dismissible fade show" role="alert" id="message">
+                 <span  style="font-weight: bold;">Please check Your Inbox, a mail has been send at your <strong>given email address</strong>  with further instructions of registration Process.</span>.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="horizontalloaders2" id="horizontalloaders12"></div>
+        
+            <form method="POST" id="sigupform" onsubmit="submit_signup()">
+                {% csrf_token %}
+                <br>
+                <br>
+             
+           <div class="input-container">
+             <i class="fa fa-user icon"></i>
+             {{ form.firstname }}
+             
+           </div>
+            
+           <div class="note" id="note1" style="margin-top: -1.5rem;border: none;">
+            <span id="first" style="font-weight: bold;"></span>
+        </div>
+           <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            {{ form.lastname }}
+            
+          </div>
+           
+          <div class="note" id="note1" style="margin-top: -1.5rem;border: none;">
+            <span id="last" style="font-weight: bold;"></span>
+        </div>
+   
+           <div class="input-container">
+             <i class="fa fa-envelope icon"></i>
+             {{ form.email }}
+           </div>
+         
+           <div class="note" id="note1" style="margin-top: -1.5rem;border: none;">
+            <span id="userexits" style="font-weight: bold;"></span>
+        </div>
+        <div class="input-container">
+          <i class="fas fa-mobile icon"></i>
+          {{ form.phnumber }}
+        </div>
+      
+        <div class="note" id="pnumber" style="margin-top: -1.5rem;border: none;">
+         <span id="phno" style="font-weight: bold;"></span>
+     </div>
+           <br>
+<div style="text-align: center;">
+
+    <span style="font-weight: bold;">By creating an account, I agree to the <a href="#" style="color: purple;" >Terms of Use and acknowledge </a> that I have read the <a href='#' style="color: purple;">Privacy Policy</a>.</span>
+
+</div>
+
+
+<br>
+                  
+           <div style="display: flex;justify-content: center;">
+            <button class="sub"  style="
+             width: 15rem;
+             height: auto;
+             text-align: center;
+             background: #eb648c;
+             color: white;font-size: 2rem;
+             font-weight: bold;
+             text-decoration: none;
+             border: 2px solid #eb648c;
+           border-radius: 2rem;
+           text-transform: uppercase;
+           font-family: special elite,cursive;
+          
+         
+         "> Submit   </button>
+            </div>
+                  <h5 style="color: black;text-transform:initial;font-size:0.8rem;font-weight: bold;text-align: center;padding-top: 0.8rem;">Already Have An Account? <a href="#" onclick="earn()" style="text-decoration: none;color:purple;"> Login</a></h5>
+        
+          
+               </form>
+            
+ 
+               <form method="POST" id="otpform" onsubmit="submit_otp(document.getElementById('email1').value)">
+                <div style="text-align: center;" class="alert alert-info" role="alert">
+
+                  <span style="font-weight: bold;">An otp has been Send at your given Number.So Please Enter the 6-digit otp Here</span>
+              
+              </div>
+                {% csrf_token %}
+                <br>
+                <br>
+             
+           <div class="input-container">
+             <i class="fa fa-key icon"></i>
+             {{ form2.otp }}
+             
+           </div>
+            
+           <div class="alert alert-danger" id="wrongotps" >
+            <span id="wrongotp" style="font-weight: bold;"></span>
+        </div>
+
+
+
+<br>
+                  
+           <div style="display: flex;justify-content: center;">
+            <button class="sub"  style="
+             width: 15rem;
+             height: auto;
+             text-align: center;
+             background: #eb648c;
+             color: white;font-size: 2rem;
+             font-weight: bold;
+             text-decoration: none;
+             border: 2px solid #eb648c;
+           border-radius: 2rem;
+           text-transform: uppercase;
+           font-family: special elite,cursive;
+          
+         
+         "> Submit   </button>
+            </div>
+                  <h5 style="color: black;text-transform:initial;font-size:0.8rem;font-weight: bold;text-align: center;padding-top: 0.8rem;">Already Have An Account? <a href="#" onclick="earn()" style="text-decoration: none;color:purple;"> Login</a></h5>
+        
+          
+               </form>
+
+
+        
+        
+        </div>
+            
+            
+            </div>
+        
+        
+      
+               </div>
+                       
+      
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    
+    <br>
+      <div class="link" style="text-align: center;color: white;"><a href="https://icons8.com" style="color: white;font-size: 9px;"> Icons by Icons8</a></div>   
+    </div>
+  <div class="modal fade" id="note" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #eb648c; color: white;height:auto;margin-bottom: 2rem;text-align: center;margin-left: -0.1rem;">
+ <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;position: initial;text-align: center"> </h3>
+  
+        </div>
+        <div class="modal-body" style="text-align: center;">
+                <i class="fas fa-mail" style="color: #eb648c;"></i>
+                <span style="font-weight: bold;"> <i class="fas fa-check-circle"></i> Please check Your Inbox, a mail has been send at your given email address with further instructions of registration Process.</span>
+
+        </div>
+        <div class="modal-footer" id="buttons">
+
+          <a href ="{% url 'home' %}" style="text-decoration: none;"><button type="button" class="btn btn-info" style="font-size: 1rem;padding:0.5rem 1rem;font-weight:bold;background-color: #eb648c !important;">Ok</button></a>
+        </div>
+      </div>
+    </div>
+ </div>
+
+
+
+ <div class="modal fade" id="address" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #eb648c; color: white;height:auto;margin-bottom: 2rem;text-align: center;margin-left: -0.1rem;">
+ <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;position: initial;text-align: center"><i class="fas fa-map-marker-alt"></i> Choose Your Shipping Address</h3>
+ <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+                
+            
+
+
+            {% if obj %}
+            {% for i in obj%}
+            <div id="column" style="margin: 1rem 0 0;">
+              <div class="card  shadow h-100 py-2" style=" background: linear-gradient(to bottom, #ccffff 0%, #3399ff 100%),url('https://www.pexels.com/photo/silver-desk-lamp-near-pile-of-books-1122530/') center no-repeat;">
+              
+                <div class="card-body">
+                  <div class="medias">
+                      {% if i.address_status > 0  %}
+                      Current <i class="fas fa-check-circle" style="color: #fafafa;font-size: 1.5rem;"></i>
+                      {% endif %}
+                      <div class="media-body ml-2" >
+                        <h5 class="mt-0" style="font-weight: bold;">{{ i.fullname}}</h5>
+                         <span style="font-weight: bold;font-family: sans-serif;">{{ i.houseno}} {{i.areaname}} , {{i.landmark}}<br>{{i.towncity}} {{ i.state }} {{ i.pincode }}<br>
+                        Mobile Number - {{i.mobileno}}</span>
+                      </div>
+                    </div>
+                </div>
+                {% if i.address_status < 0  %}
+                <span class="ml-2" style="font-weight:bold;">
+                   
+                        <form id="address{{ i.addid }}" onsubmit="change(this.id)">
+                            {% csrf_token %}
+                     <button type="submit" style="padding:0.5rem 0.5rem;font-weight: bold;border-radius: 1rem;border: 1px solid #fafafa;"> Deliver to this Address </button>
+                  
+                    </form>
+               
+                </span>
+                {% endif %}
+              
+              </div>
+           
+
+              <div class="modal fade" id="exampleModal{{ i.addid }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Did You Want To Remove Address?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p style="font-weight: bold;">After Removing this , It will be get Deleted Permanently.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btns" data-dismiss="modal" style="border: 1px solid #fafafa;border-radius: 1rem;padding: 0.5rem 1rem;color: white;background-color: #eb648c;font-weight: bold;">Close</button>
+                     <a href="#"><button type="button" class="btns" style="border: 2px solid red;border-radius: 1rem;padding: 0.5rem 1rem;color: white;background-color: red;font-weight: bold;">Ok, Delete</button>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <!-- <div id ="row">
+
+              
+                <div id="column" >
+                  <div class="card  shadow h-100 py-2" style=" background: linear-gradient(to bottom, #66ccff 0%, #ff99cc 100%),url('https://www.pexels.com/photo/silver-desk-lamp-near-pile-of-books-1122530/') center no-repeat;">
+                   
+                    <div class="card-body" style="">
+                      <div class="medi" style="text-align: center;justify-content: center;" data-toggle="modal" data-target="#exampleModalLong">
+                          <i class="fas fa-plus" style="color: #eb648c;font-size: 10rem;font-weight: bold;"></i>
+                         <h3 style="color: #fafafa;font-weight: bold;font-family: sans-serif;">ADD ADDRESS</h3>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div> -->
+
+<div class="" style="width: 100%;text-align: center;margin: 2rem 0 0;">
+    <a href="#"><button style="background-color: #fafafa;border: 2px solid #eb648c;padding:0.5rem 1rem;color: black;border-radius: 2rem;font-weight: bold;font-family: special Ellite,'cursive';">
+        Add Address
+    </button>
+</div>
+
+        </div>
+     
+      </div>
+    </div>
+ </div>
+
+
+{% if user.is_authenticated %}
+  <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #eb648c; color: white;height:5rem;margin-bottom: 2rem;text-align: center;margin-left: -0.1rem;">
+ <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;position: initial;text-align: center">Are You Sure ?</h3>
+  
+        </div>
+        <div class="modal-body" style="text-align: center;">
+                <i class="fas fa-times fa-4x animated rotateIn" style="color: red;"></i>
+        </div>
+        <div class="modal-footer" id="buttons">
+          <button type="button" class=" btn-success" data-dismiss="modal" style="font-size: 1.5rem;font-weight:bold;padding:1rem;background-color: #eb648c; border:2px solid #fafafa  !important;border-radius: 1rem;">Close</button>
+          <a href ="{% url 'LOGOUT' %}" style="text-decoration: none;"><button type="button" class=" btn-danger" style="font-size: 1.5rem;padding:1rem;font-weight:bold;background-color: red;border: 2px solid white !important;border-radius: 1rem;">Yes, Sure</button></a>
+        </div>
+      </div>
+    </div>
+ </div>
+{% endif %}
+<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="alertLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #eb648c; color: white;height:5rem;margin-bottom: 2rem;text-align: center;margin-left: -0.1rem;">
+ <h3 class="modal-title" id="alertLabel1" style="text-align: center;position: initial;text-align: center"></h3>
+  
+        </div>
+        <div class="modal-body" style="text-align: center;">
+                <p><b>Please check your Inbox, A mail with a link has been send at  your given email address with further instructions.</b></p>
+        </div>
+        <div class="modal-footer" id="buttons">
+          <a href="{% url 'home' %}"><button type="button" class=" btn-success" data-dismiss="modal" style="font-size: 1.5rem;font-weight:bold;padding:0.5rem 1rem;background-color: #eb648c; border:2px solid #fafafa  !important;border-radius: 1rem;">ok</button>
+    </a>
+        </div>
+      </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+ <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script>
+  
+var _0x1377=['warn','height','getElementById','info','100%','error','width','exception','style','trace','matches','log','debug','21rem','return\x20(function()\x20','mobfilter','apply','console','(max-width:\x20350px)'];(function(_0x349e6d,_0x1377e3){var _0x4f780b=function(_0x2be8dd){while(--_0x2be8dd){_0x349e6d['push'](_0x349e6d['shift']());}};_0x4f780b(++_0x1377e3);}(_0x1377,0x141));var _0x4f78=function(_0x349e6d,_0x1377e3){_0x349e6d=_0x349e6d-0x0;var _0x4f780b=_0x1377[_0x349e6d];return _0x4f780b;};var _0x348cd0=function(){var _0x11bcc7=!![];return function(_0x1f42f5,_0x34da27){var _0x2fad8a=_0x11bcc7?function(){if(_0x34da27){var _0x169d47=_0x34da27[_0x4f78('0x12')](_0x1f42f5,arguments);_0x34da27=null;return _0x169d47;}}:function(){};_0x11bcc7=![];return _0x2fad8a;};}();var _0x1ff925=_0x348cd0(this,function(){var _0x1a3509=function(){};var _0x3e39fc;try{var _0x3875b4=Function(_0x4f78('0x10')+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x3e39fc=_0x3875b4();}catch(_0x513d8c){_0x3e39fc=window;}if(!_0x3e39fc['console']){_0x3e39fc[_0x4f78('0x0')]=function(_0x45de94){var _0x207c88={};_0x207c88[_0x4f78('0xd')]=_0x45de94;_0x207c88[_0x4f78('0x2')]=_0x45de94;_0x207c88[_0x4f78('0xe')]=_0x45de94;_0x207c88[_0x4f78('0x5')]=_0x45de94;_0x207c88[_0x4f78('0x7')]=_0x45de94;_0x207c88[_0x4f78('0x9')]=_0x45de94;_0x207c88['table']=_0x45de94;_0x207c88[_0x4f78('0xb')]=_0x45de94;return _0x207c88;}(_0x1a3509);}else{_0x3e39fc[_0x4f78('0x0')][_0x4f78('0xd')]=_0x1a3509;_0x3e39fc[_0x4f78('0x0')][_0x4f78('0x2')]=_0x1a3509;_0x3e39fc[_0x4f78('0x0')][_0x4f78('0xe')]=_0x1a3509;_0x3e39fc[_0x4f78('0x0')][_0x4f78('0x5')]=_0x1a3509;_0x3e39fc['console'][_0x4f78('0x7')]=_0x1a3509;_0x3e39fc[_0x4f78('0x0')]['exception']=_0x1a3509;_0x3e39fc['console']['table']=_0x1a3509;_0x3e39fc[_0x4f78('0x0')][_0x4f78('0xb')]=_0x1a3509;}});_0x1ff925();function openNav(){var _0xca27ce=window['matchMedia'](_0x4f78('0x1'));if(_0xca27ce[_0x4f78('0xc')]){document['getElementById']('mobfilter')['style'][_0x4f78('0x8')]=_0x4f78('0x6');}else{document['getElementById'](_0x4f78('0x11'))[_0x4f78('0xa')][_0x4f78('0x8')]=_0x4f78('0xf');}document[_0x4f78('0x4')](_0x4f78('0x11'))[_0x4f78('0xa')][_0x4f78('0x3')]=_0x4f78('0x6');}function closeNav(){document[_0x4f78('0x4')](_0x4f78('0x11'))[_0x4f78('0xa')][_0x4f78('0x8')]='0';document[_0x4f78('0x4')](_0x4f78('0x11'))[_0x4f78('0xa')][_0x4f78('0x3')]='0';}
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Login INTO yOUR Abookshelf Account, And  start buying  and selling books"
+    />
+    <meta name="author" content="" />
+
+    <title>Abookshelf | LOGIN into Abookshelf</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'subcriptions/shelf.jpg' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Custom styles for this template-->
+    <link
+      href="{% static 'subcriptions/sb-admin-2.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{% static 'subcriptions/all.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      .container {
+        /* background-color: #2bd5e9; */
+      }
+      h1 {
+        margin: 15px 0 25px;
+        text-align: center;
+        font-size: 30px;
+        font-family: Bitter;
+        font-weight: bold;
+      }
+      input {
+        color: #2e4c7e !important;
+        font-weight: bold;
+        font-family: special Elite, cursive !important;
+      }
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      input[type="text"]:focus {
+        box-shadow: 0 0 5px rgba(246, 8, 110, 0.8);
+        border: 1px solid rgba(246, 8, 110, 0.8);
+      }
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .form-horizontal {
+        width: 320px;
+        background-color: #ffffff;
+        padding: 25px 38px;
+        border-radius: 12px;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+      }
+      .control-label {
+        text-align: left !important;
+        padding-bottom: 4px;
+      }
+      .progress {
+        height: 3px !important;
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+      .show-pass {
+        position: absolute;
+        top: 5%;
+        right: 8%;
+      }
+      .progress-bar-danger {
+        background-color: #e90f10;
+      }
+      .progress-bar-warning {
+        background-color: #ffad00;
+      }
+      .progress-bar-success {
+        background-color: #02b502;
+      }
+      .login-btn {
+        width: 180px !important;
+        background-image: linear-gradient(
+          to right,
+          #f6086e,
+          #ff133a
+        ) !important;
+        font-size: 18px;
+        color: #fff;
+        margin: 0 auto 5px;
+        padding: 8px 0;
+        font-family: Special Elite, cursive;
+      }
+      .login-btn:hover {
+        background-image: linear-gradient(
+          to right,
+          rgba(255, 0, 111, 0.8),
+          rgba(247, 2, 43, 0.8)
+        ) !important;
+        color: #fff !important;
+      }
+      .fa-eye {
+        color: #022255;
+        cursor: pointer;
+        margin-top: 0.5rem;
+      }
+      .ex-account p a {
+        color: #f6086e;
+        text-decoration: underline;
+        font-family: Bitter;
+        font-weight: bold;
+      }
+      .fa-circle {
+        font-size: 6px;
+      }
+      .fa-check {
+        color: #02b502;
+      }
+      #alerts {
+        display: none;
+      }
+
+      .horizontalloaders1 {
+        width: 50%;
+        height: 10px;
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden !important;
+        display: none;
+        margin-bottom: 0.5rem;
+        background-color: #eb648c;
+        animation-name: examples;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes examples {
+        0% {
+          background-color: #eb648c;
+          left: 0px;
+          top: 0px;
+        }
+        90% {
+          background-color: #eb648c;
+          left: 90%;
+          top: 0px;
+        }
+        100% {
+          background-color: #eb648c;
+          left: 100%;
+          top: 0px;
+          width: 10%;
+        }
+      }
+
+      .horizontalloaders2 {
+        width: 50%;
+        height: 10px;
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden !important;
+        display: none;
+        margin-bottom: 0.5rem;
+        background-color: #eb648c;
+        animation-name: examples2;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes examples2 {
+        0% {
+          background-color: #eb648c;
+          left: 0px;
+          top: 0px;
+        }
+        90% {
+          background-color: #eb648c;
+          left: 90%;
+          top: 0px;
+        }
+        100% {
+          background-color: #eb648c;
+          left: 100%;
+          top: 0px;
+          width: 10%;
+        }
+      }
+
+      .previous a button {
+        color: #fafafa;
+        font-weight: bold;
+        font-family: Bitter;
+        padding: 7px 20px 6px 20px;
+        border: 0;
+        outline: 0;
+        border-radius: 2px;
+        transition: 0.15s ease-in-out all;
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+        background: linear-gradient(to right, #eb648c 50%, hotpink 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+      }
+
+      .previous a button:hover {
+        cursor: pointer;
+        background-position: left bottom;
+      }
+      .previous {
+        float: left;
+        margin: 1rem 1rem 1rem;
+      }
+    </style>
+
+    <style>
+      #img {
+        width: 100%;
+        height: 80%;
+      }
+    </style>
+    {% if response %}
+    <style>
+      #horizontalloaders11 {
+        display: none;
+      }
+      #accountform {
+        opacity: 1;
+      }
+    </style>
+
+    {% endif %} {% for key,value in specdict.items %} {% if key == 'course' %}
+    {% if value != 0 %}
+    <style>
+      #row1 {
+        display: none;
+      }
+    </style>
+    {% else %}
+    <style>
+      #row2 {
+        display: none;
+      }
+    </style>
+    {% endif %} {% endif %} {% endfor %}
+  </head>
+
+  <body class="" style="background-color: #f6086e;">
+    <div class="loader" id="loaders"></div>
+
+    <div class="container">
+      <form
+        class="form-horizontal"
+        id="loginform"
+        method="POST"
+        onsubmit="submit_form()"
+      >
+        {% csrf_token %}
+        <div class="horizontalloaders1" id="horizontalloaders11"></div>
+        <h1>Welcome</h1>
+        <fieldset>
+          <!-- Email input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="textinput">
+              Email
+            </label>
+            <div class="col-md-12">
+              <input
+                id="email"
+                name="textinput"
+                type="email"
+                autocomplete="off"
+                placeholder="Enter your email address"
+                class="form-control input-md"
+              />
+            </div>
+          </div>
+
+          <!-- Password input-->
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="passwordinput">
+              Password
+            </label>
+            <div class="col-md-12">
+              <input
+                id="password"
+                class="form-control input-md"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+              />
+              <span class="show-pass" onclick="toggle()">
+                <i class="far fa-eye" onclick="myFunction(this)"></i>
+              </span>
+              <div id="popover-password">
+                <p><span id="result"></span></p>
+                <div class="progress">
+                  <div
+                    id="password-strength"
+                    class="progress-bar"
+                    role="progressbar"
+                    aria-valuenow="40"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%;"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Button -->
+          <div class="note alert-danger mb-1 p-2" id="alerts">
+            <span id="note_pass1" style="font-weight: bold;"></span>
+            <span id="note_pass2" style="font-weight: bold;"></span>
+            <span id="note_pass3" style="font-weight: bold;"></span>
+          </div>
+
+          <div class="form-group">
+            <button class="btn login-btn btn-block" type="submit">
+              Login
+            </button>
+          </div>
+          <div class="ex-account text-center">
+            <p>Need an account? <a href="{% url 'SIGNUP' %}">Signin</a></p>
+            <div class="divider"></div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    ></script>
+
+    <script>
+      function submit_form() {
+        console.log("Came here");
+        document.getElementById("horizontalloaders11").style.display = "block";
+        document.getElementById("loginform").style.opacity = "0.5";
+        $(document).on("submit", "#loginform", function (e) {
+          e.preventDefault();
+          emails = document.getElementById("email").value;
+          pass = document.getElementById("password").value;
+          console.log(emails, pass);
+          $.ajax({
+            type: "POST",
+            url: "/user/login/",
+            dataType: "json",
+            data: {
+              email: emails,
+              password: pass,
+              csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+              document.getElementById("loginform").style.opacity = "1";
+              document.getElementById("horizontalloaders11").style.display =
+                "none";
+              console.log(data);
+              if (data.nouser) {
+                document.getElementById("alerts").style.display = "block";
+                document.getElementById("note_pass1").innerHTML =
+                  "No user with this Credentials";
+              }
+              if (data.wrongpassword) {
+                document.getElementById("alerts").style.display = "block";
+                document.getElementById("note_pass1").innerHTML =
+                  "Incorrect Password";
+              }
+              if (data.valid) {
+                location.href = "/";
+              }
+            },
+          });
+        });
+      }
+    </script>
+    <script>
+      let state = false;
+      let password = document.getElementById("password");
+
+      password.addEventListener("keyup", function () {
+        let pass = document.getElementById("password").value;
+      });
+
+      function toggle() {
+        if (state) {
+          document.getElementById("password").setAttribute("type", "password");
+          state = false;
+        } else {
+          document.getElementById("password").setAttribute("type", "text");
+          state = true;
+        }
+      }
+
+      function myFunction(show) {
+        show.classList.toggle("fa-eye-slash");
+      }
+    </script>
+  </body>
+</html>

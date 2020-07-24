@@ -1,0 +1,853 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Create An Abookshelf Account and start buying and selling books.">
+  <meta name="author" content="">
+
+ 
+  <title>Abookshelf | Signup Account of  Abookshelf</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{% static 'bookstore/shelf.jpg' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Custom styles for this template-->
+  <link href="{% static 'subcriptions/sb-admin-2.min.css' %}" rel="stylesheet">
+ 
+  <link href="{% static 'subcriptions/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'subcriptions/addmanually.css' %}" rel="stylesheet">
+  
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+<link href="https://fonts.googleapis.com/css?family=Arvo|Bitter|Bree+Serif|Righteous|Special+Elite&display=swap" rel="stylesheet">
+
+
+
+
+<script>
+
+
+
+
+
+
+  function submit_signup(){
+     
+//             $('#exampleModal').modal('hide');
+//             $('body').removeClass('modal-open');
+// $('.modal-backdrop').remove();
+
+// $('#message').modal('show');
+    document.getElementById('sigupform').style.opacity="0.5";
+    document.getElementById('horizontalloaders12').style.display="block";
+    names = document.getElementById('name')
+    names.setAttribute('readonly','')
+    emails = document.getElementById('email1')
+    emails.setAttribute('readonly','')
+    lastnames = document.getElementById('lastname')
+    lastnames.setAttribute('readonly','')
+    pnumbers = document.getElementById('phnumber')
+    pnumbers.setAttribute('readonly','')
+
+    cvc = document.getElementById('cvc')
+    cvc.setAttribute('readonly','')
+    month = document.getElementById('month')
+    month.setAttribute('readonly','')
+    year = document.getElementById('year')
+    year.setAttribute('readonly','')
+      console.log('Came here');
+      $(document).on('submit','#sigupform',function(e){
+         e.preventDefault();
+         names = document.getElementById('name').value
+         emails = document.getElementById('email1').value
+         lastnames = document.getElementById('lastname').value
+         pnumbers = document.getElementById('phnumber').value
+
+         cvc = document.getElementById('cvc').value
+         month = document.getElementById('month').value
+         year = document.getElementById('year').value
+
+         console.log(names,emails,lastnames);
+         document.getElementById('userexits').style.display = 'none';
+          document.getElementById('userexits').style.color='#ff3333';
+          document.getElementById('email1').style.border='1px solid grey';
+         $.ajax({
+               type:'POST',
+               url:'/user/signup/',
+               dataType: 'json',
+               data:{
+                 name:names,
+                 lastname:lastnames,
+                 email : emails,
+                 phnumber:pnumbers,
+                 month:month,
+                 year : year,
+                 cvc:cvc,
+                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+               },
+               success:function(data){
+                names = document.getElementById('name')
+                names.removeAttribute('readonly')
+                emails = document.getElementById('email1')
+                emails.removeAttribute('readonly')
+                lastnames = document.getElementById('lastname')
+                lastnames.removeAttribute('readonly')
+                pnumbers = document.getElementById('phnumber')
+                pnumbers.removeAttribute('readonly')
+
+                cvc = document.getElementById('cvc')
+                cvc.removeAttribute('readonly')
+                month = document.getElementById('month')
+                month.removeAttribute('readonly')
+                year = document.getElementById('year')
+                year.removeAttribute('readonly')
+
+                document.getElementById('sigupform').style.opacity="1";
+                document.getElementById('horizontalloaders12').style.display="none";
+                console.log(data);
+                 if (data.userexists){
+                  document.getElementById('userexits').style.display = 'block';
+                 document.getElementById('userexits').innerHTML = 'Someone has already Registered with this email-id';
+                 document.getElementById('userexits').style.color='#ff3333';
+                 document.getElementById('email1').style.border='2px solid #ff3333';
+         }
+         if (data.notvalidname){
+             notvalidname();
+         }
+         if (data.notvalidlastname){
+             notlastname();
+         }
+         if (data.emailsend){
+$('#message').css({'display': 'block'});
+document.getElementById("sigupform").reset();
+         }
+         if(data.otpsend){
+           document.getElementById('otpform').style.display = 'block';
+           document.getElementById('sigupform').style.display='none';
+         }
+              
+               }
+         });
+      });
+      
+      }
+      
+      
+      </script>
+<script>
+function submit_otp(emails)
+{
+document.getElementById('otpform').style.opacity="0.5";
+otp = document.getElementById('otp')
+otp.setAttribute('readonly','')
+document.getElementById('horizontalloaders12').style.display="block";
+console.log('Came heressss');
+console.log(emails);
+      $(document).on('submit','#otpform',function(e){
+         e.preventDefault();
+         otp = document.getElementById('otp').value
+         console.log(otp);
+        //  document.getElementById('userexits').style.display = 'none';
+        //   document.getElementById('userexits').style.color='#ff3333';
+        //   document.getElementById('email').style.border='1px solid grey';
+         $.ajax({
+               type:'POST',
+               url:'/user/otp/',
+               dataType: 'json',
+               data:{
+                 otp:otp,
+                 email:emails,
+                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+               },
+               success:function(data){
+                otp = document.getElementById('otp')
+                otp.removeAttribute('readonly')
+                document.getElementById('otpform').style.opacity="1";
+                document.getElementById('horizontalloaders12').style.display="none";
+                   console.log(data);
+                 if (data.otpwrong){
+                  document.getElementById('wrongotps').style.display = 'block';
+                 document.getElementById('wrongotp').innerHTML = 'Invalid OTP ';
+                
+         }
+         if (data.emailsend){
+$('#message').css({'display': 'block'});
+document.getElementById("sigupform").style.display = 'block';
+document.getElementById("sigupform").reset();
+document.getElementById("otpform").reset();
+document.getElementById("otpform").style.display = 'none';
+         }
+              
+               }
+         });
+      });
+}
+</script>
+
+
+
+
+
+
+<style>
+
+
+.name,  h5{
+    font-size: 0.8rem;
+}
+.value,  h5{
+    font-size: 0.8rem;
+}
+           #img2,#img3{
+      display: none;
+  }
+  #model1
+  {
+      border: 1px solid #eb648c;
+      margin: 0rem 1rem 1rem;
+      padding: 0.5rem 0.8rem 0.8rem;
+    
+  }
+  #model2
+  {
+     
+      margin: 0rem 0rem 1rem;
+      border: 1px solid #fafaff;
+      padding: 0.5rem 0.8rem 0.8rem;
+    
+  }
+#alerts{
+display: none;
+        }
+
+        #otpform{
+display: none;
+        }
+        #sigupform
+        {
+          display: block;
+        }
+        #wrongotps{
+          display: none;
+        }
+        .foolinks{
+          color: #fafafa;
+        }
+          #message{
+              display: none;
+          }
+
+
+#alerts{
+    display: none;
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: #eb648c;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+
+}
+.qty{
+  padding: 10px;
+  background: #eb648c;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  border-bottom-left-radius: 1r                                                                                                                                    em;
+  border-top-left-radius: 1rem;
+
+}
+
+/* Style the input fields */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(230, 207, 228);
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1),
+    0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-left: none;
+  font-family: Special elite,cursive;
+  font-weight: bold;
+}
+
+.input-field:focus {
+  -webkit-box-shadow:0 0 5px #eb648c inset;
+-moz-box-shadow:0 0 5px #eb648c inset;
+box-shadow:0 0 5px #eb648c inset;
+    
+  transition: all 0.3s ease-in-out;
+}
+
+.input-fields {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid rgb(230, 207, 228);
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1),
+    0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 1rem;
+
+  border-left: none;
+  font-family: Special elite,cursive;
+  font-weight: bold;
+}
+
+.input-fields:focus {
+  -webkit-box-shadow:0 0 5px #eb648c inset;
+-moz-box-shadow:0 0 5px #eb648c inset;
+box-shadow:0 0 5px #eb648c inset;
+    
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+  .horizontalloaders1{
+      width: 50%;
+      height: 10px;
+      position: relative;
+      border-radius:2rem;
+      overflow: hidden !important;
+      display: none;
+      margin-bottom: 0.5rem;
+      background-color: #eb648c;
+      animation-name: examples;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    
+    }
+  
+    @keyframes examples {
+      0%   {background-color:#eb648c; left:0px; top:0px;}
+      90%   {background-color:#eb648c; left:90%; top:0px;}
+      100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+    }
+  
+  
+  
+  
+    .horizontalloaders2{
+      width: 50%;
+      height: 10px;
+      position: relative;
+      border-radius:2rem;
+      overflow: hidden !important;
+      display: none;
+      margin-bottom: 0.5rem;
+      background-color: #eb648c;
+      animation-name: examples2;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    
+    }
+  
+    @keyframes examples2 {
+      0%   {background-color:#eb648c; left:0px; top:0px;}
+      90%   {background-color:#eb648c; left:90%; top:0px;}
+      100% {background-color:#eb648c; left:100%; top:0px;width: 10%;}
+    }
+  
+    .procedbutton button{
+  /* background-color: #eb648c; */
+  color: #fafafa;
+  font-weight: bold;
+  font-family: Bitter;
+  padding: 7px 20px 6px 20px;
+  border: 0;
+  outline: 0;
+  border-radius: 2px;
+  transition: 0.15s ease-in-out all;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to right,#eb648c 50%,hotpink 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+
+.procedbutton button:hover{
+  cursor: pointer;
+  background-position: left bottom;
+  
+}
+.procedbutton{
+    float: right;
+    margin: 1rem 1rem 1rem;
+}
+  
+.previous a button{
+
+  color: #fafafa;
+  font-weight: bold;
+  font-family: Bitter;
+  padding: 7px 20px 6px 20px;
+  border: 0;
+  outline: 0;
+  border-radius: 2px;
+  transition: 0.15s ease-in-out all;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to right,#eb648c 50%,hotpink 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+
+}
+
+.previous a  button:hover{
+  cursor: pointer;
+  background-position: left bottom;
+  
+}
+.previous{
+    float: left;
+    margin: 1rem 1rem 1rem;
+}
+  
+  </style>
+
+
+<style>
+  #img{
+  
+    width: 100%;
+    height: 80%;
+  }
+</style>
+{% if response %}
+<style>
+#horizontalloaders11{
+  display: none;
+
+}
+#accountform{
+  opacity: 1;
+}
+
+
+</style>
+
+{% endif %}
+
+{% for key,value in specdict.items %}
+{% if key == 'course' %}
+{% if value != 0 %}
+<style>
+#row1{
+   
+   display: none;
+ 
+ }
+ 
+
+</style>
+{% else %}
+<style>
+#row2{
+   
+   display: none;
+ 
+ }
+</style>
+{% endif %}
+{% endif %}  
+{% endfor %}
+
+
+
+
+
+
+
+</head>
+
+<body class="" style="background-color: #eb648c;">
+
+
+  <div class="loader" id="loaders"></div> 
+
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center" id="hero">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show bg-white" role="alert" style="position: absolute;text-align: center;z-index: 1;">
+            {% for message in messages %}
+            <span  style="font-weight: bold;font-family: Special Elite,cursive;">  <i class="fas fa-check-circle"></i> {{ message }} </span>
+            {% endfor %}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         {% endif %}
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row" id="row1">
+
+              <div class="col-lg-6 d-none d-lg-block">
+
+                <div class="back p-2" onclick="{location.href='/'}" id="home1">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="p-5">
+
+
+
+                  <img src="{% static 'subcriptions/notify.png' %}" alt="" id="img">
+
+                  
+
+
+                </div>
+
+
+
+
+
+
+              </div>
+
+
+
+                <div class="col-lg-6">
+                  <div class="back p-2" onclick="{location.href='/'}" id="home2">
+                    <i class="fas fa-home"></i>
+                  </div>
+                    <div class="p-5">
+                            
+                        <div class="test" style="background-color: #eb648c; color: white;height:5rem;margin-bottom: 2rem;">
+                            <h5 style="text-align: center;font-size:2rem;padding-top:1rem;font-family:bitter">Signup</h5>
+                        </div>
+                    
+                          <div class="alert alert-warning alert-dismissible fade show" role="alert" id="message">
+                             <span  style="font-weight: bold;">Please check Your Inbox, a mail has been send at your <strong>given email address</strong>  with further instructions of registration Process.</span>.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="horizontalloaders2" id="horizontalloaders12"></div>
+                    
+                          <form method="POST" id="sigupform">
+                            {% csrf_token %}
+                           
+                         
+                       <div class="input-container">
+                         <i class="fa fa-user icon"></i>
+                         {{ form.firstname }}
+                         
+                       </div>
+                        
+                       <div class="note" id="note1" style="margin-top: -1rem;border: none;">
+                        <span id="first" style="font-weight: bold;font-family: Special eilte,cursive;"></span>
+                    </div>
+                    <br>
+                   
+                       <div class="input-container">
+                        <i class="fa fa-user icon"></i>
+                        {{ form.lastname }}
+                        
+                      </div>
+                      
+                  
+                      <div class="note" id="note1" style="margin-top: -1rem;border: none;">
+                        <span id="last" style="font-weight: bold;font-family: Special eilte,cursive;"></span>
+                    </div>
+                    <br>
+                       <div class="input-container">
+                         <i class="fa fa-envelope icon"></i>
+                         {{ form.email }}
+                       </div>
+                       
+                    
+                       <div class="note" id="note1" style="margin-top: -1rem;border: none;">
+                        <span id="userexits" style="font-weight: bold;font-family: Special eilte,cursive;"></span>
+                    </div>
+                    <br>
+                    <div class="input-container">
+                      <i class="fas fa-credit icon"></i>
+                      {{ form.cardnumber }}
+                    </div>
+                  
+                    <div class="note" id="pnumber" style="margin-top: -1rem;border: none;">
+                     <span id="userexits1" style="font-weight: bold;font-family: Special eilte,cursive;"></span>
+                 </div>
+             
+              <div class="form-row pt-3">
+
+                    <div class="col-md-4 mb-3">
+                  
+                      {{ form.month }}
+           
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      {{ form.year }}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                  
+                      {{ form.cvc }}
+           
+                    </div>
+                </div>
+                       <br>
+            <div style="text-align: center;">
+            
+                <span style="font-weight: bold;">By creating an account, I agree to the <a href="#" style="color: purple;" >Terms of Use and acknowledge </a> that I have read the <a href='#' style="color: purple;">Privacy Policy</a>.</span>
+            
+            </div>
+            
+            
+            <br>
+                              
+                       <div style="display: flex;justify-content: center;">
+                        <button class="sub"  style="
+                         width: 15rem;
+                         height: auto;
+                         text-align: center;
+                         background: #eb648c;
+                         color: white;font-size: 2rem;
+                         font-weight: bold;
+                         text-decoration: none;
+                         border: 2px solid #eb648c;
+                       border-radius: 2rem;
+                       text-transform: uppercase;
+                       font-family: special elite,cursive;
+                      
+                     
+                     "> Submit   </button>
+                        </div>
+                        <h5 style="color: black;text-transform:initial;font-size:0.8rem;font-weight: bold;text-align: center;padding-top: 0.8rem;">Already Have An Account? <a href="{% url 'login2' %}"  style="text-decoration: none;color:purple;"> Login</a></h5>
+                    
+                      
+                           </form>
+                        
+             
+                           <form method="POST" id="otpform" onsubmit="submit_otp(document.getElementById('email1').value)">
+                            <div style="text-align: center;" class="alert alert-info" role="alert">
+            
+                              <span style="font-weight: bold;">An otp has been Send at your given Number.So Please Enter the 6-digit otp Here</span>
+                          
+                          </div>
+                            {% csrf_token %}
+                            <br>
+                            <br>
+                         
+                       <div class="input-container">
+                         <i class="fa fa-key icon"></i>
+                         {{ form2.otp }}
+                         
+                       </div>
+                        
+                       <div class="alert alert-danger" id="wrongotps" >
+                        <span id="wrongotp" style="font-weight: bold;"></span>
+                    </div>
+            
+            
+            
+            <br>
+                              
+                       <div style="display: flex;justify-content: center;">
+                        <button class="sub"  style="
+                         width: 15rem;
+                         height: auto;
+                         text-align: center;
+                         background: #eb648c;
+                         color: white;font-size: 2rem;
+                         font-weight: bold;
+                         text-decoration: none;
+                         border: 2px solid #eb648c;
+                       border-radius: 2rem;
+                       text-transform: uppercase;
+                       font-family: special elite,cursive;
+                      
+                     
+                     "> Submit   </button>
+                        </div>
+                              <h5 style="color: black;text-transform:initial;font-size:0.8rem;font-weight: bold;text-align: center;padding-top: 0.8rem;">Already Have An Account? <a href="{% url 'login2' %}"  style="text-decoration: none;color:purple;"> Login</a></h5>
+                    
+                      
+                           </form>
+            
+            
+                           <div style="text-align: center; margin: 10rem auto;">
+                            <button id="checkout-button">
+                              Checkout
+                            </button>
+                          </div>
+
+
+
+
+
+                  </div>
+            
+            </div>
+
+
+
+
+
+
+
+<!------
+
+next row
+
+-->
+
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+         
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal fade" id="note" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #eb648c; color: white;height:auto;margin-bottom: 2rem;text-align: center;margin-left: -0.1rem;">
+ <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;position: initial;text-align: center"> </h3>
+  
+        </div>
+        <div class="modal-body" style="text-align: center;">
+                <i class="fas fa-mail" style="color: #eb648c;"></i>
+                <span style="font-weight: bold;"> <i class="fas fa-check-circle"></i> Please check Your Inbox, a mail has been send at your given email address with further instructions of registration Process.</span>
+
+        </div>
+        <div class="modal-footer" id="buttons">
+
+          <a href ="{% url 'home' %}" style="text-decoration: none;"><button type="button" class="btn btn-info" style="font-size: 1rem;padding:0.5rem 1rem;font-weight:bold;background-color: #eb648c !important;">Ok</button></a>
+        </div>
+      </div>
+    </div>
+ </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'subcriptions/jquery.min.js' %}"></script>
+
+<script src="{% static 'subcriptions/bootstrap.bundle.min.js' %}"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'subcriptions/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'subcriptions/sb-admin-2.min.js' %}"></script>
+
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+
+
+
+<script>
+
+
+
+
+
+</script>
+
+
+
+<!-- 
+<script>
+
+
+var _0x5c1e=['otpsend','error','wrongpassword','wrongotps','notvalidname','emailsend','style','userexists','block','email','valid','debug','otpform','input[name=csrfmiddlewaretoken]','horizontalloaders11','setAttribute','0.5','#otpform','phnumber','notvalidlastname','preventDefault','#loginform','submit','display','innerHTML','info','value','css','{}.constructor(\x22return\x20this\x22)(\x20)','/user/signup/','sigupform','Incorrect\x20Password','exception','console','trace','2px\x20solid\x20#ff3333','alerts','none','/user/otp/','warn','border','json','/user/login/','No\x20user\x20with\x20this\x20Credentials','#ff3333','#message','loginform','note_pass1','val','reset','readonly','opacity','userexits','/','horizontalloaders12','ajax','getElementById','name','table','otpwrong','color','otp','nouser','wrongotp','log','removeAttribute','email1','#sigupform','Came\x20heressss','lastname','password','Came\x20here','POST','href'];(function(_0xea157,_0x5c1e67){var _0x402140=function(_0x4814c2){while(--_0x4814c2){_0xea157['push'](_0xea157['shift']());}};_0x402140(++_0x5c1e67);}(_0x5c1e,0x67));var _0x4021=function(_0xea157,_0x5c1e67){_0xea157=_0xea157-0x0;var _0x402140=_0x5c1e[_0xea157];return _0x402140;};var _0x4d0150=function(){var _0x553889=!![];return function(_0xb35734,_0x2f2a65){var _0x584fe4=_0x553889?function(){if(_0x2f2a65){var _0x5d35c1=_0x2f2a65['apply'](_0xb35734,arguments);_0x2f2a65=null;return _0x5d35c1;}}:function(){};_0x553889=![];return _0x584fe4;};}();var _0x507265=_0x4d0150(this,function(){var _0x1ee995=function(){};var _0xa73e41;try{var _0x3978d7=Function('return\x20(function()\x20'+_0x4021('0x49')+');');_0xa73e41=_0x3978d7();}catch(_0x57f095){_0xa73e41=window;}if(!_0xa73e41[_0x4021('0x4')]){_0xa73e41[_0x4021('0x4')]=function(_0x7e58c7){var _0x336b7b={};_0x336b7b[_0x4021('0x23')]=_0x7e58c7;_0x336b7b[_0x4021('0xa')]=_0x7e58c7;_0x336b7b[_0x4021('0x38')]=_0x7e58c7;_0x336b7b['info']=_0x7e58c7;_0x336b7b['error']=_0x7e58c7;_0x336b7b[_0x4021('0x3')]=_0x7e58c7;_0x336b7b['table']=_0x7e58c7;_0x336b7b[_0x4021('0x5')]=_0x7e58c7;return _0x336b7b;}(_0x1ee995);}else{_0xa73e41[_0x4021('0x4')][_0x4021('0x23')]=_0x1ee995;_0xa73e41['console'][_0x4021('0xa')]=_0x1ee995;_0xa73e41[_0x4021('0x4')][_0x4021('0x38')]=_0x1ee995;_0xa73e41[_0x4021('0x4')][_0x4021('0x46')]=_0x1ee995;_0xa73e41[_0x4021('0x4')][_0x4021('0x2e')]=_0x1ee995;_0xa73e41[_0x4021('0x4')][_0x4021('0x3')]=_0x1ee995;_0xa73e41['console'][_0x4021('0x1d')]=_0x1ee995;_0xa73e41[_0x4021('0x4')]['trace']=_0x1ee995;}});_0x507265();function submit_otp(_0x511bb5){document[_0x4021('0x1b')]('otpform')['style'][_0x4021('0x16')]=_0x4021('0x3d');otp=document[_0x4021('0x1b')](_0x4021('0x20'));otp[_0x4021('0x3c')](_0x4021('0x15'),'');document[_0x4021('0x1b')]('horizontalloaders12')[_0x4021('0x33')]['display']=_0x4021('0x35');console[_0x4021('0x23')](_0x4021('0x27'));console[_0x4021('0x23')](_0x511bb5);$(document)['on'](_0x4021('0x43'),_0x4021('0x3e'),function(_0x2483de){_0x2483de[_0x4021('0x41')]();otp=document[_0x4021('0x1b')](_0x4021('0x20'))[_0x4021('0x47')];console['log'](otp);$[_0x4021('0x1a')]({'type':'POST','url':_0x4021('0x9'),'dataType':_0x4021('0xc'),'data':{'otp':otp,'email':_0x511bb5,'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]')['val']()},'success':function(_0x1645e5){otp=document[_0x4021('0x1b')]('otp');otp['removeAttribute'](_0x4021('0x15'));document[_0x4021('0x1b')](_0x4021('0x39'))[_0x4021('0x33')]['opacity']='1';document[_0x4021('0x1b')](_0x4021('0x19'))[_0x4021('0x33')][_0x4021('0x44')]=_0x4021('0x8');console[_0x4021('0x23')](_0x1645e5);if(_0x1645e5[_0x4021('0x1e')]){document[_0x4021('0x1b')](_0x4021('0x30'))[_0x4021('0x33')][_0x4021('0x44')]=_0x4021('0x35');document[_0x4021('0x1b')](_0x4021('0x22'))[_0x4021('0x45')]='Invalid\x20OTP\x20';}if(_0x1645e5[_0x4021('0x32')]){$(_0x4021('0x10'))[_0x4021('0x48')]({'display':_0x4021('0x35')});document['getElementById'](_0x4021('0x1'))[_0x4021('0x33')][_0x4021('0x44')]=_0x4021('0x35');document[_0x4021('0x1b')](_0x4021('0x1'))[_0x4021('0x14')]();document[_0x4021('0x1b')]('otpform')[_0x4021('0x14')]();document[_0x4021('0x1b')](_0x4021('0x39'))['style'][_0x4021('0x44')]=_0x4021('0x8');}}});});}function submit_signup(){document[_0x4021('0x1b')]('sigupform')[_0x4021('0x33')][_0x4021('0x16')]=_0x4021('0x3d');document[_0x4021('0x1b')](_0x4021('0x19'))['style'][_0x4021('0x44')]=_0x4021('0x35');names=document[_0x4021('0x1b')](_0x4021('0x1c'));names[_0x4021('0x3c')](_0x4021('0x15'),'');emails=document[_0x4021('0x1b')]('email1');emails['setAttribute'](_0x4021('0x15'),'');lastnames=document[_0x4021('0x1b')](_0x4021('0x28'));lastnames[_0x4021('0x3c')](_0x4021('0x15'),'');pnumbers=document[_0x4021('0x1b')](_0x4021('0x3f'));pnumbers[_0x4021('0x3c')](_0x4021('0x15'),'');console['log'](_0x4021('0x2a'));$(document)['on'](_0x4021('0x43'),_0x4021('0x26'),function(_0x18ab3e){_0x18ab3e['preventDefault']();names=document[_0x4021('0x1b')](_0x4021('0x1c'))[_0x4021('0x47')];emails=document[_0x4021('0x1b')](_0x4021('0x25'))[_0x4021('0x47')];lastnames=document[_0x4021('0x1b')](_0x4021('0x28'))[_0x4021('0x47')];pnumbers=document[_0x4021('0x1b')]('phnumber')[_0x4021('0x47')];console['log'](names,emails,lastnames);document[_0x4021('0x1b')](_0x4021('0x17'))[_0x4021('0x33')][_0x4021('0x44')]=_0x4021('0x8');document[_0x4021('0x1b')](_0x4021('0x17'))[_0x4021('0x33')][_0x4021('0x1f')]=_0x4021('0xf');document[_0x4021('0x1b')](_0x4021('0x36'))[_0x4021('0x33')][_0x4021('0xb')]='1px\x20solid\x20grey';$['ajax']({'type':_0x4021('0x2b'),'url':_0x4021('0x0'),'dataType':_0x4021('0xc'),'data':{'name':names,'lastname':lastnames,'email':emails,'phnumber':pnumbers,'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]')[_0x4021('0x13')]()},'success':function(_0x56d89d){names=document[_0x4021('0x1b')](_0x4021('0x1c'));names[_0x4021('0x24')](_0x4021('0x15'));emails=document[_0x4021('0x1b')]('email1');emails[_0x4021('0x24')](_0x4021('0x15'));lastnames=document[_0x4021('0x1b')](_0x4021('0x28'));lastnames[_0x4021('0x24')]('readonly');pnumbers=document['getElementById'](_0x4021('0x3f'));pnumbers['removeAttribute'](_0x4021('0x15'));document['getElementById']('sigupform')[_0x4021('0x33')][_0x4021('0x16')]='1';document[_0x4021('0x1b')](_0x4021('0x19'))[_0x4021('0x33')][_0x4021('0x44')]=_0x4021('0x8');console[_0x4021('0x23')](_0x56d89d);if(_0x56d89d[_0x4021('0x34')]){document[_0x4021('0x1b')](_0x4021('0x17'))['style'][_0x4021('0x44')]=_0x4021('0x35');document['getElementById'](_0x4021('0x17'))[_0x4021('0x45')]='Someone\x20has\x20already\x20Registered\x20with\x20this\x20email-id';document[_0x4021('0x1b')](_0x4021('0x17'))['style']['color']='#ff3333';document[_0x4021('0x1b')](_0x4021('0x36'))['style'][_0x4021('0xb')]=_0x4021('0x6');}if(_0x56d89d[_0x4021('0x31')]){notvalidname();}if(_0x56d89d[_0x4021('0x40')]){notlastname();}if(_0x56d89d[_0x4021('0x32')]){$(_0x4021('0x10'))['css']({'display':'block'});document[_0x4021('0x1b')](_0x4021('0x1'))[_0x4021('0x14')]();}if(_0x56d89d[_0x4021('0x2d')]){document[_0x4021('0x1b')](_0x4021('0x39'))[_0x4021('0x33')]['display']=_0x4021('0x35');document[_0x4021('0x1b')]('sigupform')['style'][_0x4021('0x44')]=_0x4021('0x8');}}});});}function submit_form(){console[_0x4021('0x23')]('Came\x20here');document[_0x4021('0x1b')](_0x4021('0x3b'))[_0x4021('0x33')][_0x4021('0x44')]='block';document['getElementById'](_0x4021('0x11'))[_0x4021('0x33')][_0x4021('0x16')]=_0x4021('0x3d');$(document)['on']('submit',_0x4021('0x42'),function(_0x11cc89){_0x11cc89[_0x4021('0x41')]();emails=document[_0x4021('0x1b')](_0x4021('0x36'))['value'];pass=document[_0x4021('0x1b')](_0x4021('0x29'))[_0x4021('0x47')];console[_0x4021('0x23')](emails,pass);$[_0x4021('0x1a')]({'type':_0x4021('0x2b'),'url':_0x4021('0xd'),'dataType':_0x4021('0xc'),'data':{'email':emails,'password':pass,'csrfmiddlewaretoken':$(_0x4021('0x3a'))[_0x4021('0x13')]()},'success':function(_0xe4fdf6){document[_0x4021('0x1b')](_0x4021('0x11'))[_0x4021('0x33')]['opacity']='1';document[_0x4021('0x1b')](_0x4021('0x3b'))['style'][_0x4021('0x44')]=_0x4021('0x8');console[_0x4021('0x23')](_0xe4fdf6);if(_0xe4fdf6[_0x4021('0x21')]){document[_0x4021('0x1b')](_0x4021('0x7'))[_0x4021('0x33')]['display']=_0x4021('0x35');document[_0x4021('0x1b')](_0x4021('0x12'))[_0x4021('0x45')]=_0x4021('0xe');}if(_0xe4fdf6[_0x4021('0x2f')]){document[_0x4021('0x1b')](_0x4021('0x7'))[_0x4021('0x33')][_0x4021('0x44')]='block';document[_0x4021('0x1b')](_0x4021('0x12'))['innerHTML']=_0x4021('0x2');}if(_0xe4fdf6[_0x4021('0x37')]){location[_0x4021('0x2c')]=_0x4021('0x18');}}});});}
+
+</script>
+
+<script>
+
+var _0xaae6=['border','phnumber','wrongotp','Came\x20heressss','val','emailsend','table','note_pass1','/','2px\x20solid\x20#ff3333','removeAttribute','href','color','horizontalloaders12','style','ajax','#otpform','trace','warn','display','/user/login/','email1','otpsend','getElementById','error','Someone\x20has\x20already\x20Registered\x20with\x20this\x20email-id','0.5','console','log','input[name=csrfmiddlewaretoken]','sigupform','otpwrong','/user/otp/','return\x20(function()\x20','#message','block','info','innerHTML','otpform','value','none','opacity','{}.constructor(\x22return\x20this\x22)(\x20)','email','notvalidname','submit','horizontalloaders11','Came\x20here','setAttribute','lastname','alerts','readonly','exception','notvalidlastname','name','1px\x20solid\x20grey','POST','otp','nouser','json','css','preventDefault','#ff3333','userexits','Incorrect\x20Password','reset','loginform','valid'];(function(_0x562376,_0xaae6ac){var _0x4b2fa7=function(_0x3bf8da){while(--_0x3bf8da){_0x562376['push'](_0x562376['shift']());}};_0x4b2fa7(++_0xaae6ac);}(_0xaae6,0x1ce));var _0x4b2f=function(_0x562376,_0xaae6ac){_0x562376=_0x562376-0x0;var _0x4b2fa7=_0xaae6[_0x562376];return _0x4b2fa7;};var _0x3335ee=function(){var _0x267567=!![];return function(_0x146bd4,_0x517c4e){var _0x1a0e17=_0x267567?function(){if(_0x517c4e){var _0x24a725=_0x517c4e['apply'](_0x146bd4,arguments);_0x517c4e=null;return _0x24a725;}}:function(){};_0x267567=![];return _0x1a0e17;};}();var _0x54d292=_0x3335ee(this,function(){var _0x2a5fd6=function(){};var _0x52abad=function(){var _0xa6abd0;try{_0xa6abd0=Function(_0x4b2f('0x2f')+_0x4b2f('0x38')+');')();}catch(_0x539b8d){_0xa6abd0=window;}return _0xa6abd0;};var _0x378868=_0x52abad();if(!_0x378868[_0x4b2f('0x29')]){_0x378868[_0x4b2f('0x29')]=function(_0x3a18c6){var _0x4738b9={};_0x4738b9[_0x4b2f('0x2a')]=_0x3a18c6;_0x4738b9[_0x4b2f('0x20')]=_0x3a18c6;_0x4738b9['debug']=_0x3a18c6;_0x4738b9[_0x4b2f('0x32')]=_0x3a18c6;_0x4738b9[_0x4b2f('0x26')]=_0x3a18c6;_0x4738b9[_0x4b2f('0x42')]=_0x3a18c6;_0x4738b9[_0x4b2f('0x14')]=_0x3a18c6;_0x4738b9[_0x4b2f('0x1f')]=_0x3a18c6;return _0x4738b9;}(_0x2a5fd6);}else{_0x378868[_0x4b2f('0x29')][_0x4b2f('0x2a')]=_0x2a5fd6;_0x378868[_0x4b2f('0x29')]['warn']=_0x2a5fd6;_0x378868[_0x4b2f('0x29')]['debug']=_0x2a5fd6;_0x378868[_0x4b2f('0x29')][_0x4b2f('0x32')]=_0x2a5fd6;_0x378868[_0x4b2f('0x29')][_0x4b2f('0x26')]=_0x2a5fd6;_0x378868[_0x4b2f('0x29')][_0x4b2f('0x42')]=_0x2a5fd6;_0x378868['console'][_0x4b2f('0x14')]=_0x2a5fd6;_0x378868[_0x4b2f('0x29')][_0x4b2f('0x1f')]=_0x2a5fd6;}});_0x54d292();function submit_otp(_0x5b006c){document[_0x4b2f('0x25')](_0x4b2f('0x34'))[_0x4b2f('0x1c')][_0x4b2f('0x37')]='0.5';otp=document[_0x4b2f('0x25')](_0x4b2f('0x3'));otp[_0x4b2f('0x3e')](_0x4b2f('0x41'),'');document['getElementById'](_0x4b2f('0x1b'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');console[_0x4b2f('0x2a')](_0x4b2f('0x11'));console[_0x4b2f('0x2a')](_0x5b006c);$(document)['on'](_0x4b2f('0x3b'),_0x4b2f('0x1e'),function(_0x47d46f){_0x47d46f[_0x4b2f('0x7')]();otp=document[_0x4b2f('0x25')](_0x4b2f('0x3'))['value'];console[_0x4b2f('0x2a')](otp);$[_0x4b2f('0x1d')]({'type':_0x4b2f('0x2'),'url':_0x4b2f('0x2e'),'dataType':_0x4b2f('0x5'),'data':{'otp':otp,'email':_0x5b006c,'csrfmiddlewaretoken':$(_0x4b2f('0x2b'))[_0x4b2f('0x12')]()},'success':function(_0x3596c0){otp=document['getElementById'](_0x4b2f('0x3'));otp[_0x4b2f('0x18')]('readonly');document[_0x4b2f('0x25')]('otpform')['style']['opacity']='1';document['getElementById'](_0x4b2f('0x1b'))['style'][_0x4b2f('0x21')]='none';console['log'](_0x3596c0);if(_0x3596c0[_0x4b2f('0x2d')]){document[_0x4b2f('0x25')]('wrongotps')[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');document['getElementById'](_0x4b2f('0x10'))[_0x4b2f('0x33')]='Invalid\x20OTP\x20';}if(_0x3596c0[_0x4b2f('0x13')]){$(_0x4b2f('0x30'))[_0x4b2f('0x6')]({'display':'block'});document[_0x4b2f('0x25')](_0x4b2f('0x2c'))['style'][_0x4b2f('0x21')]='block';document[_0x4b2f('0x25')]('sigupform')[_0x4b2f('0xb')]();document[_0x4b2f('0x25')](_0x4b2f('0x34'))[_0x4b2f('0xb')]();document[_0x4b2f('0x25')]('otpform')[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x36');}}});});}function submit_signup(){document[_0x4b2f('0x25')](_0x4b2f('0x2c'))[_0x4b2f('0x1c')][_0x4b2f('0x37')]=_0x4b2f('0x28');document[_0x4b2f('0x25')]('horizontalloaders12')[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');names=document[_0x4b2f('0x25')](_0x4b2f('0x0'));names[_0x4b2f('0x3e')](_0x4b2f('0x41'),'');emails=document[_0x4b2f('0x25')]('email1');emails['setAttribute'](_0x4b2f('0x41'),'');lastnames=document[_0x4b2f('0x25')](_0x4b2f('0x3f'));lastnames[_0x4b2f('0x3e')](_0x4b2f('0x41'),'');pnumbers=document['getElementById'](_0x4b2f('0xf'));pnumbers[_0x4b2f('0x3e')](_0x4b2f('0x41'),'');console[_0x4b2f('0x2a')](_0x4b2f('0x3d'));$(document)['on']('submit','#sigupform',function(_0x277dff){_0x277dff[_0x4b2f('0x7')]();names=document[_0x4b2f('0x25')](_0x4b2f('0x0'))[_0x4b2f('0x35')];emails=document['getElementById']('email1')[_0x4b2f('0x35')];lastnames=document['getElementById'](_0x4b2f('0x3f'))[_0x4b2f('0x35')];pnumbers=document[_0x4b2f('0x25')](_0x4b2f('0xf'))[_0x4b2f('0x35')];console[_0x4b2f('0x2a')](names,emails,lastnames);document[_0x4b2f('0x25')](_0x4b2f('0x9'))['style'][_0x4b2f('0x21')]='none';document[_0x4b2f('0x25')](_0x4b2f('0x9'))[_0x4b2f('0x1c')]['color']=_0x4b2f('0x8');document[_0x4b2f('0x25')](_0x4b2f('0x39'))[_0x4b2f('0x1c')][_0x4b2f('0xe')]=_0x4b2f('0x1');$[_0x4b2f('0x1d')]({'type':_0x4b2f('0x2'),'url':'/user/signup/','dataType':_0x4b2f('0x5'),'data':{'name':names,'lastname':lastnames,'email':emails,'phnumber':pnumbers,'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]')[_0x4b2f('0x12')]()},'success':function(_0x522076){names=document[_0x4b2f('0x25')](_0x4b2f('0x0'));names[_0x4b2f('0x18')](_0x4b2f('0x41'));emails=document[_0x4b2f('0x25')](_0x4b2f('0x23'));emails[_0x4b2f('0x18')](_0x4b2f('0x41'));lastnames=document[_0x4b2f('0x25')](_0x4b2f('0x3f'));lastnames[_0x4b2f('0x18')]('readonly');pnumbers=document[_0x4b2f('0x25')](_0x4b2f('0xf'));pnumbers[_0x4b2f('0x18')](_0x4b2f('0x41'));document[_0x4b2f('0x25')](_0x4b2f('0x2c'))['style'][_0x4b2f('0x37')]='1';document[_0x4b2f('0x25')](_0x4b2f('0x1b'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x36');console[_0x4b2f('0x2a')](_0x522076);if(_0x522076['userexists']){document[_0x4b2f('0x25')](_0x4b2f('0x9'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');document[_0x4b2f('0x25')](_0x4b2f('0x9'))[_0x4b2f('0x33')]=_0x4b2f('0x27');document[_0x4b2f('0x25')](_0x4b2f('0x9'))[_0x4b2f('0x1c')][_0x4b2f('0x1a')]=_0x4b2f('0x8');document[_0x4b2f('0x25')](_0x4b2f('0x39'))[_0x4b2f('0x1c')]['border']=_0x4b2f('0x17');}if(_0x522076[_0x4b2f('0x3a')]){notvalidname();}if(_0x522076[_0x4b2f('0x43')]){notlastname();}if(_0x522076[_0x4b2f('0x13')]){$('#message')[_0x4b2f('0x6')]({'display':_0x4b2f('0x31')});document[_0x4b2f('0x25')]('sigupform')[_0x4b2f('0xb')]();}if(_0x522076[_0x4b2f('0x24')]){document[_0x4b2f('0x25')]('otpform')[_0x4b2f('0x1c')]['display']=_0x4b2f('0x31');document[_0x4b2f('0x25')](_0x4b2f('0x2c'))['style'][_0x4b2f('0x21')]=_0x4b2f('0x36');}}});});}function submit_form(){console[_0x4b2f('0x2a')](_0x4b2f('0x3d'));document[_0x4b2f('0x25')](_0x4b2f('0x3c'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');document[_0x4b2f('0x25')](_0x4b2f('0xc'))[_0x4b2f('0x1c')][_0x4b2f('0x37')]=_0x4b2f('0x28');$(document)['on']('submit','#loginform',function(_0x1c0576){_0x1c0576[_0x4b2f('0x7')]();emails=document[_0x4b2f('0x25')](_0x4b2f('0x39'))[_0x4b2f('0x35')];pass=document[_0x4b2f('0x25')]('password')[_0x4b2f('0x35')];console[_0x4b2f('0x2a')](emails,pass);$[_0x4b2f('0x1d')]({'type':_0x4b2f('0x2'),'url':_0x4b2f('0x22'),'dataType':_0x4b2f('0x5'),'data':{'email':emails,'password':pass,'csrfmiddlewaretoken':$(_0x4b2f('0x2b'))[_0x4b2f('0x12')]()},'success':function(_0x354f65){document[_0x4b2f('0x25')](_0x4b2f('0xc'))['style'][_0x4b2f('0x37')]='1';document['getElementById'](_0x4b2f('0x3c'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x36');console[_0x4b2f('0x2a')](_0x354f65);if(_0x354f65[_0x4b2f('0x4')]){document[_0x4b2f('0x25')](_0x4b2f('0x40'))[_0x4b2f('0x1c')]['display']='block';document['getElementById']('note_pass1')['innerHTML']='No\x20user\x20with\x20this\x20Credentials';}if(_0x354f65['wrongpassword']){document[_0x4b2f('0x25')](_0x4b2f('0x40'))[_0x4b2f('0x1c')][_0x4b2f('0x21')]=_0x4b2f('0x31');document['getElementById'](_0x4b2f('0x15'))[_0x4b2f('0x33')]=_0x4b2f('0xa');}if(_0x354f65[_0x4b2f('0xd')]){location[_0x4b2f('0x19')]=_0x4b2f('0x16');}}});});}
+
+</script> -->
+<script>
+  var stripe = Stripe(
+    "pk_test_51H6aJHEoanPy9ym0YhsVmX6Nz24wbDv0i2HygIRLBt1BllWmPKE71Nrlv16luAYTwAgmdfqkdiWb411cUpGqGH5N00rePP7L1m"
+  );
+
+  var checkoutButton = document.getElementById("checkout-button");
+
+  checkoutButton.addEventListener("click", function () {
+    stripe
+      .redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as argument here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: "{{seesionid}}",
+      })
+      .then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+      });
+  });
+</script>
+
+
+  {% if namenotmatch %}
+  <script>
+var _0x1cad=['#message','otpform','return\x20(function()\x20','css','val','/','POST','password','console','preventDefault','style','otpsend','/user/otp/','error','emailsend','userexits','loginform','phnumber','color','apply','horizontalloaders12','href','exception','trace','userexists','Someone\x20has\x20already\x20Registered\x20with\x20this\x20email-id','#otpform','note_pass1','ajax','{}.constructor(\x22return\x20this\x22)(\x20)','email1','json','wrongpassword','setAttribute','horizontalloaders11','log','debug','#loginform','lastname','alerts','/user/login/','Came\x20here','0.5','wrongotp','/user/signup/','Invalid\x20OTP\x20','email','border','input[name=csrfmiddlewaretoken]','getElementById','#sigupform','valid','1px\x20solid\x20grey','otp','notvalidlastname','opacity','value','warn','#ff3333','readonly','display','sigupform','none','wrongotps','innerHTML','info','reset','removeAttribute','otpwrong','block','table','submit','name','Incorrect\x20Password'];(function(_0x34ad8f,_0x1cad35){var _0x34b17a=function(_0x597378){while(--_0x597378){_0x34ad8f['push'](_0x34ad8f['shift']());}};_0x34b17a(++_0x1cad35);}(_0x1cad,0x141));var _0x34b1=function(_0x34ad8f,_0x1cad35){_0x34ad8f=_0x34ad8f-0x0;var _0x34b17a=_0x1cad[_0x34ad8f];return _0x34b17a;};var _0x340710=function(){var _0x4c8ab7=!![];return function(_0x245b09,_0x2be8d6){var _0x5a579a=_0x4c8ab7?function(){if(_0x2be8d6){var _0x3c387a=_0x2be8d6[_0x34b1('0x44')](_0x245b09,arguments);_0x2be8d6=null;return _0x3c387a;}}:function(){};_0x4c8ab7=![];return _0x5a579a;};}();var _0x5e9069=_0x340710(this,function(){var _0x3136e8=function(){};var _0x55aafb=function(){var _0x4227a7;try{_0x4227a7=Function(_0x34b1('0x33')+_0x34b1('0x4')+');')();}catch(_0x4d6877){_0x4227a7=window;}return _0x4227a7;};var _0x1e9f68=_0x55aafb();if(!_0x1e9f68[_0x34b1('0x39')]){_0x1e9f68[_0x34b1('0x39')]=function(_0x399e43){var _0x56299e={};_0x56299e['log']=_0x399e43;_0x56299e[_0x34b1('0x20')]=_0x399e43;_0x56299e[_0x34b1('0xb')]=_0x399e43;_0x56299e[_0x34b1('0x28')]=_0x399e43;_0x56299e[_0x34b1('0x3e')]=_0x399e43;_0x56299e[_0x34b1('0x47')]=_0x399e43;_0x56299e[_0x34b1('0x2d')]=_0x399e43;_0x56299e[_0x34b1('0x48')]=_0x399e43;return _0x56299e;}(_0x3136e8);}else{_0x1e9f68[_0x34b1('0x39')][_0x34b1('0xa')]=_0x3136e8;_0x1e9f68['console'][_0x34b1('0x20')]=_0x3136e8;_0x1e9f68[_0x34b1('0x39')]['debug']=_0x3136e8;_0x1e9f68[_0x34b1('0x39')]['info']=_0x3136e8;_0x1e9f68[_0x34b1('0x39')][_0x34b1('0x3e')]=_0x3136e8;_0x1e9f68[_0x34b1('0x39')][_0x34b1('0x47')]=_0x3136e8;_0x1e9f68[_0x34b1('0x39')][_0x34b1('0x2d')]=_0x3136e8;_0x1e9f68[_0x34b1('0x39')][_0x34b1('0x48')]=_0x3136e8;}});_0x5e9069();function submit_otp(_0x45906a){document[_0x34b1('0x18')](_0x34b1('0x32'))[_0x34b1('0x3b')][_0x34b1('0x1e')]=_0x34b1('0x11');otp=document[_0x34b1('0x18')](_0x34b1('0x1c'));otp[_0x34b1('0x8')](_0x34b1('0x22'),'');document[_0x34b1('0x18')](_0x34b1('0x45'))[_0x34b1('0x3b')]['display']='block';console[_0x34b1('0xa')]('Came\x20heressss');console[_0x34b1('0xa')](_0x45906a);$(document)['on']('submit',_0x34b1('0x1'),function(_0x30c1a9){_0x30c1a9[_0x34b1('0x3a')]();otp=document[_0x34b1('0x18')](_0x34b1('0x1c'))[_0x34b1('0x1f')];console[_0x34b1('0xa')](otp);$[_0x34b1('0x3')]({'type':_0x34b1('0x37'),'url':_0x34b1('0x3d'),'dataType':'json','data':{'otp':otp,'email':_0x45906a,'csrfmiddlewaretoken':$(_0x34b1('0x17'))[_0x34b1('0x35')]()},'success':function(_0x36b6a3){otp=document['getElementById'](_0x34b1('0x1c'));otp[_0x34b1('0x2a')](_0x34b1('0x22'));document[_0x34b1('0x18')](_0x34b1('0x32'))[_0x34b1('0x3b')][_0x34b1('0x1e')]='1';document[_0x34b1('0x18')](_0x34b1('0x45'))[_0x34b1('0x3b')]['display']=_0x34b1('0x25');console['log'](_0x36b6a3);if(_0x36b6a3[_0x34b1('0x2b')]){document['getElementById'](_0x34b1('0x26'))[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x2c');document[_0x34b1('0x18')](_0x34b1('0x12'))[_0x34b1('0x27')]=_0x34b1('0x14');}if(_0x36b6a3[_0x34b1('0x3f')]){$(_0x34b1('0x31'))[_0x34b1('0x34')]({'display':_0x34b1('0x2c')});document[_0x34b1('0x18')]('sigupform')[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x2c');document[_0x34b1('0x18')]('sigupform')[_0x34b1('0x29')]();document[_0x34b1('0x18')](_0x34b1('0x32'))[_0x34b1('0x29')]();document[_0x34b1('0x18')](_0x34b1('0x32'))[_0x34b1('0x3b')]['display']=_0x34b1('0x25');}}});});}function submit_signup(){document[_0x34b1('0x18')](_0x34b1('0x24'))[_0x34b1('0x3b')][_0x34b1('0x1e')]=_0x34b1('0x11');document['getElementById'](_0x34b1('0x45'))[_0x34b1('0x3b')]['display']=_0x34b1('0x2c');names=document[_0x34b1('0x18')]('name');names[_0x34b1('0x8')](_0x34b1('0x22'),'');emails=document[_0x34b1('0x18')](_0x34b1('0x5'));emails[_0x34b1('0x8')](_0x34b1('0x22'),'');lastnames=document[_0x34b1('0x18')](_0x34b1('0xd'));lastnames[_0x34b1('0x8')](_0x34b1('0x22'),'');pnumbers=document[_0x34b1('0x18')](_0x34b1('0x42'));pnumbers[_0x34b1('0x8')](_0x34b1('0x22'),'');console[_0x34b1('0xa')]('Came\x20here');$(document)['on'](_0x34b1('0x2e'),_0x34b1('0x19'),function(_0x2b8132){_0x2b8132[_0x34b1('0x3a')]();names=document[_0x34b1('0x18')](_0x34b1('0x2f'))[_0x34b1('0x1f')];emails=document[_0x34b1('0x18')](_0x34b1('0x5'))[_0x34b1('0x1f')];lastnames=document[_0x34b1('0x18')](_0x34b1('0xd'))[_0x34b1('0x1f')];pnumbers=document[_0x34b1('0x18')](_0x34b1('0x42'))[_0x34b1('0x1f')];console['log'](names,emails,lastnames);document['getElementById']('userexits')[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x25');document[_0x34b1('0x18')](_0x34b1('0x40'))[_0x34b1('0x3b')][_0x34b1('0x43')]=_0x34b1('0x21');document[_0x34b1('0x18')](_0x34b1('0x15'))['style'][_0x34b1('0x16')]=_0x34b1('0x1b');$[_0x34b1('0x3')]({'type':_0x34b1('0x37'),'url':_0x34b1('0x13'),'dataType':_0x34b1('0x6'),'data':{'name':names,'lastname':lastnames,'email':emails,'phnumber':pnumbers,'csrfmiddlewaretoken':$(_0x34b1('0x17'))['val']()},'success':function(_0x28424e){names=document[_0x34b1('0x18')](_0x34b1('0x2f'));names[_0x34b1('0x2a')](_0x34b1('0x22'));emails=document['getElementById']('email1');emails[_0x34b1('0x2a')](_0x34b1('0x22'));lastnames=document[_0x34b1('0x18')](_0x34b1('0xd'));lastnames[_0x34b1('0x2a')](_0x34b1('0x22'));pnumbers=document[_0x34b1('0x18')](_0x34b1('0x42'));pnumbers[_0x34b1('0x2a')](_0x34b1('0x22'));document[_0x34b1('0x18')](_0x34b1('0x24'))[_0x34b1('0x3b')][_0x34b1('0x1e')]='1';document['getElementById'](_0x34b1('0x45'))[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x25');console[_0x34b1('0xa')](_0x28424e);if(_0x28424e[_0x34b1('0x49')]){document[_0x34b1('0x18')](_0x34b1('0x40'))[_0x34b1('0x3b')][_0x34b1('0x23')]='block';document[_0x34b1('0x18')]('userexits')[_0x34b1('0x27')]=_0x34b1('0x0');document[_0x34b1('0x18')](_0x34b1('0x40'))['style'][_0x34b1('0x43')]='#ff3333';document[_0x34b1('0x18')](_0x34b1('0x15'))['style'][_0x34b1('0x16')]='2px\x20solid\x20#ff3333';}if(_0x28424e['notvalidname']){notvalidname();}if(_0x28424e[_0x34b1('0x1d')]){notlastname();}if(_0x28424e[_0x34b1('0x3f')]){$(_0x34b1('0x31'))[_0x34b1('0x34')]({'display':_0x34b1('0x2c')});document[_0x34b1('0x18')](_0x34b1('0x24'))[_0x34b1('0x29')]();}if(_0x28424e[_0x34b1('0x3c')]){document[_0x34b1('0x18')](_0x34b1('0x32'))[_0x34b1('0x3b')]['display']=_0x34b1('0x2c');document[_0x34b1('0x18')]('sigupform')[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x25');}}});});}function submit_form(){console[_0x34b1('0xa')](_0x34b1('0x10'));document[_0x34b1('0x18')]('horizontalloaders11')[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x2c');document['getElementById'](_0x34b1('0x41'))[_0x34b1('0x3b')][_0x34b1('0x1e')]=_0x34b1('0x11');$(document)['on']('submit',_0x34b1('0xc'),function(_0x1bc60c){_0x1bc60c[_0x34b1('0x3a')]();emails=document[_0x34b1('0x18')](_0x34b1('0x15'))[_0x34b1('0x1f')];pass=document[_0x34b1('0x18')](_0x34b1('0x38'))[_0x34b1('0x1f')];console[_0x34b1('0xa')](emails,pass);$[_0x34b1('0x3')]({'type':_0x34b1('0x37'),'url':_0x34b1('0xf'),'dataType':_0x34b1('0x6'),'data':{'email':emails,'password':pass,'csrfmiddlewaretoken':$(_0x34b1('0x17'))[_0x34b1('0x35')]()},'success':function(_0x11ee25){document[_0x34b1('0x18')](_0x34b1('0x41'))[_0x34b1('0x3b')][_0x34b1('0x1e')]='1';document[_0x34b1('0x18')](_0x34b1('0x9'))['style']['display']=_0x34b1('0x25');console[_0x34b1('0xa')](_0x11ee25);if(_0x11ee25['nouser']){document[_0x34b1('0x18')](_0x34b1('0xe'))[_0x34b1('0x3b')][_0x34b1('0x23')]=_0x34b1('0x2c');document[_0x34b1('0x18')](_0x34b1('0x2'))[_0x34b1('0x27')]='No\x20user\x20with\x20this\x20Credentials';}if(_0x11ee25[_0x34b1('0x7')]){document[_0x34b1('0x18')](_0x34b1('0xe'))[_0x34b1('0x3b')][_0x34b1('0x23')]='block';document['getElementById'](_0x34b1('0x2'))[_0x34b1('0x27')]=_0x34b1('0x30');}if(_0x11ee25[_0x34b1('0x1a')]){location[_0x34b1('0x46')]=_0x34b1('0x36');}}});});}
+  </script>
+  
+  {% endif %}
+  
+  
+  {% if fail %}
+  <script>
+   var _0x49a8=['val','setAttribute','notvalidname','getElementById','loginform','debug','border','notvalidlastname','exception','input[name=csrfmiddlewaretoken]','style','return\x20(function()\x20','otp','innerHTML','0.5','email','Invalid\x20OTP\x20','userexists','trace','warn','name','href','userexits','opacity','otpwrong','readonly','color','POST','Came\x20here','wrongpassword','submit','otpsend','2px\x20solid\x20#ff3333','none','No\x20user\x20with\x20this\x20Credentials','#loginform','otpform','#message','console','1px\x20solid\x20grey','value','json','reset','ajax','password','lastname','alerts','phnumber','preventDefault','apply','error','#otpform','/user/otp/','{}.constructor(\x22return\x20this\x22)(\x20)','block','info','note_pass1','display','log','sigupform','horizontalloaders12','removeAttribute','wrongotps','#ff3333','css','nouser','#sigupform','email1','table','/user/login/'];(function(_0x26a222,_0x49a8eb){var _0x1e6bec=function(_0x235cb8){while(--_0x235cb8){_0x26a222['push'](_0x26a222['shift']());}};_0x1e6bec(++_0x49a8eb);}(_0x49a8,0x106));var _0x1e6b=function(_0x26a222,_0x49a8eb){_0x26a222=_0x26a222-0x0;var _0x1e6bec=_0x49a8[_0x26a222];return _0x1e6bec;};var _0xde26d0=function(){var _0x4dbd3c=!![];return function(_0x33c9a1,_0x227e35){var _0x42cbbb=_0x4dbd3c?function(){if(_0x227e35){var _0x2ad8e1=_0x227e35[_0x1e6b('0x43')](_0x33c9a1,arguments);_0x227e35=null;return _0x2ad8e1;}}:function(){};_0x4dbd3c=![];return _0x42cbbb;};}();var _0x3d1d89=_0xde26d0(this,function(){var _0x15775e=function(){};var _0x988260=function(){var _0x4f44ad;try{_0x4f44ad=Function(_0x1e6b('0x1d')+_0x1e6b('0x1')+');')();}catch(_0x2d460e){_0x4f44ad=window;}return _0x4f44ad;};var _0x57b0ef=_0x988260();if(!_0x57b0ef['console']){_0x57b0ef['console']=function(_0x359512){var _0x49c863={};_0x49c863[_0x1e6b('0x6')]=_0x359512;_0x49c863[_0x1e6b('0x25')]=_0x359512;_0x49c863[_0x1e6b('0x17')]=_0x359512;_0x49c863['info']=_0x359512;_0x49c863[_0x1e6b('0x44')]=_0x359512;_0x49c863[_0x1e6b('0x1a')]=_0x359512;_0x49c863['table']=_0x359512;_0x49c863[_0x1e6b('0x24')]=_0x359512;return _0x49c863;}(_0x15775e);}else{_0x57b0ef[_0x1e6b('0x38')][_0x1e6b('0x6')]=_0x15775e;_0x57b0ef[_0x1e6b('0x38')][_0x1e6b('0x25')]=_0x15775e;_0x57b0ef['console'][_0x1e6b('0x17')]=_0x15775e;_0x57b0ef[_0x1e6b('0x38')][_0x1e6b('0x3')]=_0x15775e;_0x57b0ef[_0x1e6b('0x38')]['error']=_0x15775e;_0x57b0ef[_0x1e6b('0x38')][_0x1e6b('0x1a')]=_0x15775e;_0x57b0ef[_0x1e6b('0x38')][_0x1e6b('0x10')]=_0x15775e;_0x57b0ef['console'][_0x1e6b('0x24')]=_0x15775e;}});_0x3d1d89();function submit_otp(_0x1e0b00){document[_0x1e6b('0x15')](_0x1e6b('0x36'))[_0x1e6b('0x1c')][_0x1e6b('0x29')]=_0x1e6b('0x20');otp=document[_0x1e6b('0x15')](_0x1e6b('0x1e'));otp[_0x1e6b('0x13')](_0x1e6b('0x2b'),'');document[_0x1e6b('0x15')](_0x1e6b('0x8'))[_0x1e6b('0x1c')][_0x1e6b('0x5')]=_0x1e6b('0x2');console[_0x1e6b('0x6')]('Came\x20heressss');console[_0x1e6b('0x6')](_0x1e0b00);$(document)['on']('submit',_0x1e6b('0x45'),function(_0x3efe88){_0x3efe88[_0x1e6b('0x42')]();otp=document[_0x1e6b('0x15')](_0x1e6b('0x1e'))[_0x1e6b('0x3a')];console[_0x1e6b('0x6')](otp);$[_0x1e6b('0x3d')]({'type':'POST','url':_0x1e6b('0x0'),'dataType':_0x1e6b('0x3b'),'data':{'otp':otp,'email':_0x1e0b00,'csrfmiddlewaretoken':$(_0x1e6b('0x1b'))[_0x1e6b('0x12')]()},'success':function(_0xbf084e){otp=document[_0x1e6b('0x15')](_0x1e6b('0x1e'));otp['removeAttribute'](_0x1e6b('0x2b'));document[_0x1e6b('0x15')](_0x1e6b('0x36'))[_0x1e6b('0x1c')][_0x1e6b('0x29')]='1';document[_0x1e6b('0x15')]('horizontalloaders12')[_0x1e6b('0x1c')][_0x1e6b('0x5')]=_0x1e6b('0x33');console[_0x1e6b('0x6')](_0xbf084e);if(_0xbf084e[_0x1e6b('0x2a')]){document[_0x1e6b('0x15')](_0x1e6b('0xa'))['style'][_0x1e6b('0x5')]=_0x1e6b('0x2');document[_0x1e6b('0x15')]('wrongotp')[_0x1e6b('0x1f')]=_0x1e6b('0x22');}if(_0xbf084e['emailsend']){$(_0x1e6b('0x37'))['css']({'display':_0x1e6b('0x2')});document[_0x1e6b('0x15')](_0x1e6b('0x7'))[_0x1e6b('0x1c')][_0x1e6b('0x5')]=_0x1e6b('0x2');document[_0x1e6b('0x15')](_0x1e6b('0x7'))[_0x1e6b('0x3c')]();document[_0x1e6b('0x15')]('otpform')[_0x1e6b('0x3c')]();document[_0x1e6b('0x15')](_0x1e6b('0x36'))[_0x1e6b('0x1c')]['display']=_0x1e6b('0x33');}}});});}function submit_signups(){document['getElementById'](_0x1e6b('0x7'))['style'][_0x1e6b('0x29')]='0.5';document[_0x1e6b('0x15')](_0x1e6b('0x8'))[_0x1e6b('0x1c')]['display']=_0x1e6b('0x2');names=document[_0x1e6b('0x15')](_0x1e6b('0x26'));names['setAttribute'](_0x1e6b('0x2b'),'');emails=document[_0x1e6b('0x15')]('email1');emails[_0x1e6b('0x13')]('readonly','');lastnames=document[_0x1e6b('0x15')](_0x1e6b('0x3f'));lastnames[_0x1e6b('0x13')](_0x1e6b('0x2b'),'');pnumbers=document[_0x1e6b('0x15')](_0x1e6b('0x41'));pnumbers[_0x1e6b('0x13')]('readonly','');console[_0x1e6b('0x6')](_0x1e6b('0x2e'));$(document)['on'](_0x1e6b('0x30'),_0x1e6b('0xe'),function(_0x16bdbc){_0x16bdbc[_0x1e6b('0x42')]();names=document[_0x1e6b('0x15')]('name')[_0x1e6b('0x3a')];emails=document[_0x1e6b('0x15')](_0x1e6b('0xf'))[_0x1e6b('0x3a')];lastnames=document['getElementById'](_0x1e6b('0x3f'))[_0x1e6b('0x3a')];pnumbers=document[_0x1e6b('0x15')](_0x1e6b('0x41'))[_0x1e6b('0x3a')];console[_0x1e6b('0x6')](names,emails,lastnames);document[_0x1e6b('0x15')](_0x1e6b('0x28'))[_0x1e6b('0x1c')]['display']=_0x1e6b('0x33');document[_0x1e6b('0x15')](_0x1e6b('0x28'))[_0x1e6b('0x1c')][_0x1e6b('0x2c')]=_0x1e6b('0xb');document[_0x1e6b('0x15')](_0x1e6b('0x21'))['style'][_0x1e6b('0x18')]=_0x1e6b('0x39');$[_0x1e6b('0x3d')]({'type':_0x1e6b('0x2d'),'url':'/user/signup/','dataType':_0x1e6b('0x3b'),'data':{'name':names,'lastname':lastnames,'email':emails,'phnumber':pnumbers,'csrfmiddlewaretoken':$(_0x1e6b('0x1b'))[_0x1e6b('0x12')]()},'success':function(_0x34e9f5){names=document['getElementById'](_0x1e6b('0x26'));names[_0x1e6b('0x9')]('readonly');emails=document[_0x1e6b('0x15')](_0x1e6b('0xf'));emails[_0x1e6b('0x9')](_0x1e6b('0x2b'));lastnames=document[_0x1e6b('0x15')](_0x1e6b('0x3f'));lastnames[_0x1e6b('0x9')](_0x1e6b('0x2b'));pnumbers=document[_0x1e6b('0x15')](_0x1e6b('0x41'));pnumbers[_0x1e6b('0x9')]('readonly');document[_0x1e6b('0x15')](_0x1e6b('0x7'))[_0x1e6b('0x1c')][_0x1e6b('0x29')]='1';document[_0x1e6b('0x15')]('horizontalloaders12')[_0x1e6b('0x1c')]['display']=_0x1e6b('0x33');console[_0x1e6b('0x6')](_0x34e9f5);if(_0x34e9f5[_0x1e6b('0x23')]){document['getElementById'](_0x1e6b('0x28'))['style'][_0x1e6b('0x5')]=_0x1e6b('0x2');document[_0x1e6b('0x15')](_0x1e6b('0x28'))[_0x1e6b('0x1f')]='Someone\x20has\x20already\x20Registered\x20with\x20this\x20email-id';document[_0x1e6b('0x15')](_0x1e6b('0x28'))['style'][_0x1e6b('0x2c')]=_0x1e6b('0xb');document[_0x1e6b('0x15')](_0x1e6b('0x21'))[_0x1e6b('0x1c')]['border']=_0x1e6b('0x32');}if(_0x34e9f5[_0x1e6b('0x14')]){notvalidname();}if(_0x34e9f5[_0x1e6b('0x19')]){notlastname();}if(_0x34e9f5['emailsend']){$(_0x1e6b('0x37'))[_0x1e6b('0xc')]({'display':_0x1e6b('0x2')});document[_0x1e6b('0x15')](_0x1e6b('0x7'))[_0x1e6b('0x3c')]();}if(_0x34e9f5[_0x1e6b('0x31')]){document[_0x1e6b('0x15')](_0x1e6b('0x36'))[_0x1e6b('0x1c')][_0x1e6b('0x5')]='block';document[_0x1e6b('0x15')](_0x1e6b('0x7'))['style'][_0x1e6b('0x5')]='none';}}});});}function submit_form(){console[_0x1e6b('0x6')](_0x1e6b('0x2e'));document[_0x1e6b('0x15')]('horizontalloaders11')[_0x1e6b('0x1c')][_0x1e6b('0x5')]=_0x1e6b('0x2');document[_0x1e6b('0x15')]('loginform')[_0x1e6b('0x1c')][_0x1e6b('0x29')]='0.5';$(document)['on']('submit',_0x1e6b('0x35'),function(_0x3bd18a){_0x3bd18a[_0x1e6b('0x42')]();emails=document[_0x1e6b('0x15')](_0x1e6b('0x21'))[_0x1e6b('0x3a')];pass=document[_0x1e6b('0x15')](_0x1e6b('0x3e'))[_0x1e6b('0x3a')];console[_0x1e6b('0x6')](emails,pass);$[_0x1e6b('0x3d')]({'type':_0x1e6b('0x2d'),'url':_0x1e6b('0x11'),'dataType':_0x1e6b('0x3b'),'data':{'email':emails,'password':pass,'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]')[_0x1e6b('0x12')]()},'success':function(_0x565848){document[_0x1e6b('0x15')](_0x1e6b('0x16'))[_0x1e6b('0x1c')][_0x1e6b('0x29')]='1';document[_0x1e6b('0x15')]('horizontalloaders11')['style'][_0x1e6b('0x5')]=_0x1e6b('0x33');console[_0x1e6b('0x6')](_0x565848);if(_0x565848[_0x1e6b('0xd')]){document['getElementById'](_0x1e6b('0x40'))[_0x1e6b('0x1c')]['display']=_0x1e6b('0x2');document[_0x1e6b('0x15')](_0x1e6b('0x4'))[_0x1e6b('0x1f')]=_0x1e6b('0x34');}if(_0x565848[_0x1e6b('0x2f')]){document[_0x1e6b('0x15')]('alerts')[_0x1e6b('0x1c')]['display']=_0x1e6b('0x2');document[_0x1e6b('0x15')](_0x1e6b('0x4'))[_0x1e6b('0x1f')]='Incorrect\x20Password';}if(_0x565848['valid']){location[_0x1e6b('0x27')]='/';}}});});}
+
+  </script>
+  
+  {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe(
+        "pk_test_51H6aJHEoanPy9ym0YhsVmX6Nz24wbDv0i2HygIRLBt1BllWmPKE71Nrlv16luAYTwAgmdfqkdiWb411cUpGqGH5N00rePP7L1m"
+      );
+
+      var checkoutButton = document.getElementById("checkout-button");
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center; margin: 10rem auto;">
+      <button id="checkout-button">
+        Checkout
+      </button>
+    </div>
+  </body>
+</html>

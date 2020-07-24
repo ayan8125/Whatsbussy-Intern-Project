@@ -1,0 +1,662 @@
+{% load static %}
+
+<html>
+  <head>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <title>
+      Home | Whatsbussy.
+    </title>
+
+    <link rel="stylesheet" href="{% static 'subcriptions/home.css' %}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'subcriptions/shelf.jpg' %}"
+    />
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Material Design Bootstrap -->
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Arvo|Bitter|Bree+Serif|Righteous|Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <style>
+      body {
+        margin-right: 0 !important;
+      }
+
+      #heros {
+        background-color: white;
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+        border-radius: 1em;
+      }
+      tr th {
+        font-weight: bold;
+        font-family: Special Elite, cursive;
+      }
+
+      tr td {
+        font-family: Bitter;
+        font-weight: lighter;
+      }
+
+      .status {
+        background-color: rgb(102, 194, 102);
+        color: white;
+        padding: 0.5rem 0.6rem;
+        border-radius: 1rem;
+        text-align: center;
+      }
+
+      td i:hover {
+        color: crimson;
+        cursor: pointer;
+      }
+
+      .status h5 {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .modal-content h5 {
+        font-weight: bold;
+        font-family: Biiter;
+        margin: 0.5rem;
+      }
+      .modal-content button {
+        padding: 0.5rem 1rem;
+        text-align: center;
+        background-color: crimson;
+        font-weight: bold;
+        border: 1px solid crimson;
+        width: 7rem;
+        margin: 1rem auto;
+        color: #ffffff;
+        font-family: Special Elite, cursive;
+        border-radius: 1rem;
+      }
+      .desc h5 {
+        font-weight: bold;
+        font-family: Biiter;
+        margin: 0.5rem;
+      }
+      .desc button {
+        padding: 0.5rem 1rem;
+        text-align: center;
+        background-color: crimson;
+        font-weight: bold;
+        border: 1px solid crimson;
+        width: 7rem;
+        margin: 1rem auto;
+        color: #ffffff;
+        font-family: Special Elite, cursive;
+        border-radius: 1rem;
+      }
+
+      @media screen and (max-width: 600px) {
+        tr th {
+          font-size: 0.6rem;
+        }
+        tr td {
+          font-size: 0.6rem;
+        }
+        .status h5 {
+          font-size: 0.6rem;
+        }
+        .status {
+          padding: 0.2rem 0.5rem;
+        }
+        #links2 {
+          padding-top: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+  <script>
+    function search() {
+      document.getElementById("searchicon").style.display = "none";
+      document.getElementById("search1").style.display = "block";
+      document.getElementById("search1").style.position = "relative";
+      document.getElementById("search1").style.left = "0rem";
+      document.getElementById("times").style.display = "block";
+    }
+
+    function close1() {
+      document.getElementById("times").style.display = "none";
+      document.getElementById("search1").style.display = "none";
+      document.getElementById("searchicon").style.display = "block";
+      document.getElementById("searchicon").style.position = "relative";
+      document.getElementById("searchicon").style.top = "0.9rem";
+    }
+
+    function open_menu() {
+      document.getElementById("content1").style.width = "26rem";
+      document.getElementById("nav1").style.position = "fixed";
+      // document.getElementById('container').style.opacity="0.4";
+      document.getElementById("moblist").style.opacity = "1";
+      document.getElementById("moblist").style.visibility = "visible";
+      document.getElementById("moblist").style.position = "fixed";
+      document.getElementById("opens").style.display = "none";
+      document.getElementById("closes").style.display = "block";
+    }
+
+    function close_menu() {
+      document.getElementById("content1").style.width = "0rem";
+      document.getElementById("nav1").style.position = "initial";
+      document.getElementById("moblist").style.opacity = "0";
+      document.getElementById("moblist").style.visibility = "hidden";
+      document.getElementById("opens").style.display = "block";
+      document.getElementById("closes").style.display = "none";
+      // document.getElementById('container').style.opacity="1";
+    }
+  </script>
+  <body style="">
+    <div class="mobilefilter">
+      <div class="mobilefilters bg-white" id="mobfilter">
+        <div class="closes" style="margin: 1rem;">
+          <button
+            style="
+              background-color: hotpink;
+              padding: 0.5rem 1rem;
+              border: none;
+              font-size: 1.5rem;
+            "
+            onclick="closeNav()"
+          >
+            <i
+              class="fas fa-times"
+              style="font-size: 1rem; font-weight: bold; color: #fafafa;"
+            ></i>
+          </button>
+        </div>
+        <br />
+        <div class="product1">
+          <h4
+            style="
+              font-family: special Elite, cursive;
+              font-weight: bold;
+              color: #eb648c;
+              padding: 1rem;
+            "
+          >
+            <i class="fas fa-book"></i> Bachelor Courses
+          </h4>
+          {% for i in bcourse %}
+          <a href="#">
+            <button class="cbutton">
+              {{i.1}}
+            </button>
+          </a>
+          {% endfor %}
+        </div>
+
+        <div class="product1">
+          <h4
+            style="
+              font-family: special Elite, cursive;
+              font-weight: bold;
+              color: #eb648c;
+              padding: 1rem;
+            "
+          >
+            <i class="fas fa-book"></i> Master Courses
+          </h4>
+
+          {% for i in mcourse %}
+          <a href="#">
+            <button class="cbutton">
+              {{i.1}}
+            </button>
+          </a>
+          {% endfor %}
+        </div>
+
+        <div class="product1">
+          <h4
+            style="
+              font-family: special Elite, cursive;
+              font-weight: bold;
+              color: #eb648c;
+              padding: 1rem;
+            "
+          >
+            <i class="fas fa-book"></i> Jrcollege
+          </h4>
+
+          <a href="#">
+            <button class="cbutton">
+              XI SCIENCE
+            </button>
+          </a>
+
+          <a href="#">
+            <button class="cbutton">
+              XII SCIENCE
+            </button>
+          </a>
+          <a href="#">
+            <button class="cbutton">
+              XI Arts
+            </button>
+          </a>
+          <a href="#">
+            <button class="cbutton">
+              XII Arts
+            </button>
+          </a>
+          <a href="#">
+            <button class="cbutton">
+              XI Commerce
+            </button>
+          </a>
+          <a href="#">
+            <button class="cbutton">
+              XII Commerce
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <header id="nav1">
+      <div class="containers" id="head">
+        <nav id="nav">
+          <div class="brand" style="display: inline-block;">
+            <div id="logos" style="display: inline-block;">
+              <div class="mainlogo" style="display: inline-block;">
+            
+                <div class="logo_link" style="display: inline-block;">
+                  <a
+                    href="{% url 'home' %}"
+                    style="color: #eb648c;font-size:3rem;font-weight:bold,text-decoration: none;margin-bottom: 1rem !important;display: inline-block;"
+                  >
+                    <img
+                      src="{% static 'subcriptions/logo.png' %}"
+                      id="pic"
+                      alt=""
+                      style=""
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div id="links" style="display: inline-block;">
+              <ul
+                class="nav-list"
+                id="navs"
+                style="list-style: none !important; display: flex;"
+              >
+                <li class="nav-items" style="">
+                  <a
+                    href="#"
+                    class="nav-link"
+                    style="color: #eb648c; font-size: 1.5rem;"
+                    >WhatsBusy</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="links2" class="menu" style="display: inline-block;">
+            <ul
+              class="nav-list1"
+              id="navs"
+              style="
+                list-style: none !important;
+                display: flex;
+                padding-top: 1rem !important;
+                float: right;
+              "
+            >
+              <li
+                class="nav-items1"
+                id="searchbar"
+                style="display: inline-block;"
+              >
+                <i
+                  class="fas fa-search"
+                  id="searchicon"
+                  onclick="search()"
+                  style="color: #eb648c;"
+                ></i>
+                <div id="searachform" style="display: inline-block;">
+                  <form id="search1" style="transition: all 650ms ease-in-out;">
+                    <input type="text" name="search" placeholder="Search.." />
+                    <button
+                      type="submit"
+                      id="submit"
+                      style="border: none; background: #ffffff; color: eb648c;"
+                    >
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </form>
+                </div>
+                <div style="display: inline-block;">
+                  <i
+                    class="fas fa-times"
+                    id="times"
+                    onclick="close1()"
+                    style="display: none; color: #eb648c;"
+                  ></i>
+                </div>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-link mt-1">
+                <i
+                  class="fas fa-house-user"
+                  style="color: #eb648c; font-size: 2rem;"
+                ></i>
+              </li>
+              <li class="nav-link mt-1">
+                <i
+                  class="fas fa-percentage"
+                  style="color: #eb648c; font-size: 2rem;"
+                ></i>
+              </li>
+              <li class="nav-link mt-1">
+                <i
+                  class="fab fa-hotjar"
+                  style="color: #eb648c; font-size: 2rem;"
+                ></i>
+              </li>
+              <a href="#" data-toggle="modal" data-target="#logout">
+                <li class="nav-link mt-1">
+                  <i
+                    class="fas fa-user"
+                    style="color: #eb648c; font-size: 2rem;"
+                  ></i>
+                </li>
+              </a>
+              <a href="#" data-toggle="modal" data-target="#logout">
+                <li class="nav-link mt-1">
+                  <i
+                    class="fas fa-sign-out-alt"
+                    style="color: #eb648c; font-size: 2rem;"
+                  ></i>
+                </li>
+              </a>
+              {% else %}
+              <a href="{% url 'SIGNUP' %}">
+                <li class="nav-link mt-1">
+                  Signup
+                </li></a
+              >
+
+              <a href="{% url 'Login' %}">
+                <li class="nav-link mt-1">
+                  Login
+                </li></a
+              >
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <br />
+
+    <div class="loader" id="loaders"></div>
+    <div class="main1" style="border: none;">
+      {% if messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <span style="font-weight: bold;">
+          <i class="fas fa-check-circle"></i> {{ message }}
+        </span>
+        {% endfor %}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if subscription %}
+    <div id="heros" style="">
+      <div class="subtabel">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+
+              <th scope="col">Status</th>
+              <th scope="col">Created At</th>
+              <th scope="col">EndAt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in subscription %}
+            <tr>
+              <th scope="row">{{ i.product.pname }}</th>
+
+              <td class="">
+                <div class="status" id="{{ i.sub_id }}s">
+                  <h5 id="{{ i.sub_id }}h">{{ i.givestatus }}</h5>
+                </div>
+              </td>
+              <td>{{ i.givesubscriptiondate }}</td>
+              <td>{{i.givesubscriptionenddate}}</td>
+              <td>
+                <form method="POST">
+                  {% csrf_token %}
+                  <a
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#{{i.sub_id}}modal"
+                    id="{{i.sub_id}}link"
+                  >
+                    <i class="fas fa-trash" id="{{ i.sub_id }}i"></i
+                  ></a>
+                </form>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!---CAROUSELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+
+    {% for i in subscription %}
+
+    <div
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mySmallModalLabel"
+      aria-hidden="true"
+      id="{{ i.sub_id }}modal"
+    >
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <h5>Are Your Sure , You Won to Cancel Your Subscription ?</h5>
+          <button
+            onclick="cancelmysubscription('{{i.sub_id}}')"
+            id="{{i.sub_id}}yessure"
+          >
+            Yes,Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %} {% else %}
+
+    <div
+      class="heros"
+      style="
+        box-shadow: none;
+        background-color: transparent;
+        text-align: center;
+      "
+    >
+      <div class="image">
+        <img
+          src="{% static 'subcriptions/empty_inbox_.png' %}"
+          alt=""
+          style="height: 10rem; width: 10rem;"
+        />
+      </div>
+
+      <div class="desc">
+        <h5>No Subscriptions, Yet.</h5>
+        <a href="{% url 'home' %}"
+          ><button>
+            Home
+          </button></a
+        >
+      </div>
+    </div>
+
+    {% endif %} {% if user.is_authenticated %}
+    <div
+      class="modal fade"
+      id="logout"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document" style="">
+        <div class="modal-content">
+          <div
+            class="modal-header"
+            style="
+              background-color: #eb648c;
+              color: white;
+              height: 5rem;
+              margin-bottom: 2rem;
+              text-align: center;
+              margin-left: -0.1rem;
+            "
+          >
+            <h3
+              class="modal-title"
+              id="exampleModalLabel"
+              style="text-align: center; position: initial; text-align: center;"
+            >
+              Are You Sure ?
+            </h3>
+          </div>
+          <div class="modal-body" style="text-align: center;">
+            <i
+              class="fas fa-times fa-4x animated rotateIn"
+              style="color: red;"
+            ></i>
+          </div>
+          <div class="modal-footer" id="buttons">
+            <button
+              type="button"
+              class="btn-success"
+              data-dismiss="modal"
+              style="
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 1rem;
+                background-color: #eb648c;
+                border: 2px solid #fafafa !important;
+                border-radius: 1rem;
+              "
+            >
+              Close
+            </button>
+            <a href="{% url 'LOGOUT' %}" style="text-decoration: none;"
+              ><button
+                type="button"
+                class="btn-danger"
+                style="
+                  font-size: 1.5rem;
+                  padding: 1rem;
+                  font-weight: bold;
+                  background-color: red;
+                  border: 2px solid white !important;
+                  border-radius: 1rem;
+                "
+              >
+                Yes, Sure
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      function cancelmysubscription(id) {
+        const yesbutton = document.getElementById(id + "yessure");
+        yesbutton.removeAttribute("onclick");
+        yesbutton.innerHTML = "Close";
+        yesbutton.setAttribute("data-dismiss", "modal");
+        document.getElementById("loaders").style.display = "block";
+        document.getElementById("heros").style.opacity = "0.5";
+        $.ajax({
+          type: "POST",
+          url: "/cancelmysubscription/",
+          dataType: "json",
+          data: {
+            sub_id: id,
+            csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+          },
+          success: function (data) {
+            document.getElementById("loaders").style.display = "none";
+            document.getElementById("heros").style.opacity = "1";
+
+            if (data.success) {
+              const icon = document.getElementById(id + "i");
+              const link = document.getElementById(id + "link");
+              console.log(id);
+              icon.style.color = "crimson";
+              link.removeAttribute("data-target");
+              const status = document.getElementById(id + "s");
+              status.style.backgroundColor = "coral";
+              document.getElementById(id + "h").innerHTML = "Canceled";
+            }
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
